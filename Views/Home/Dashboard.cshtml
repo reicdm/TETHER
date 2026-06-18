@@ -12,6 +12,10 @@
     var doneTasks = Model.Where(t => t.Status == "Done").ToList();
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+}
+
 <div class="d-flex justify-content-between align-items-center mb-5">
     <h1 class="text-white m-0" style="font-size: 2.2rem; font-weight: 800;">My Tasks</h1>
 
