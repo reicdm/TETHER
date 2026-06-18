@@ -19,8 +19,7 @@
     </head>
 
     <body>
-
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
         <div class="card p-5 text-center shadow-lg auth-container">
 
             <h2 class="mb-5 text-uppercase auth-title">Sign In</h2>
@@ -28,11 +27,24 @@
                 @roleDisplay Portal
             </p>
 
-            
+            <form asp-action="Dashboard" asp-controller="Home" method="get">
+                <div class="auth-input-group text-start">
+                    <label class="auth-label">Email</label>
+                    <input type="email" class="auth-form-control" placeholder="Enter your email address" required />
+                </div>
+
+                <div class="auth-input-group text-start">
+                    <label class="auth-label">Password</label>
+                    <input type="password" class="auth-form-control" placeholder="Enter your password" required />
+                </div>
+
+                <button type="submit" class="btn text-uppercase py-3 w-100 btn-next text-white" style="background-color: var(--primary-red); border-color: transparent;">
+                    Login
+                </button>
+            </form>
 
         </div>
     </div>
-
 
     </body>
 </html>

@@ -11,6 +11,7 @@
     <title>@ViewData["Title"] - TETHER</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
     </head>
@@ -28,14 +29,18 @@
             <div class="row g-4 mb-5 justify-content-center">
                 <div class="col-6 col-sm-5">
                     <div class="role-card p-4 d-flex flex-column align-items-center justify-content-center" onclick="selectRole('PM', this)">
-                        <div class="role-icon mb-3">💼</div>
+                        <div class="role-icon mb-3">
+                            <i class="bi bi-briefcase-fill" style="font-size: 2.5rem; transition: color 0.2s;"></i>
+                        </div>
                         <span style="color: var(--text-light); font-weight: 500;">Project Manager</span>
                     </div>
                 </div>
 
                 <div class="col-6 col-sm-5">
                     <div class="role-card p-4 d-flex flex-column align-items-center justify-content-center" onclick="selectRole('Member', this)">
-                        <div class="role-icon mb-3">👥</div>
+                        <div class="role-icon mb-3">
+                            <i class="bi bi-people-fill" style="font-size: 2.5rem; transition: color 0.2s;"></i>
+                        </div>
                         <span style="color: var(--text-light); font-weight: 500;">Team Member</span>
                     </div>
                 </div>
@@ -52,14 +57,18 @@
     <script>
         function selectRole(role, cardElement) {
             document.querySelectorAll('.role-card').forEach(card => {
-                card.style.borderColor = '#333';
-                card.style.backgroundColor = '#1a1a1a';
-                card.querySelector('.role-icon').style.color = 'var(--text-muted)';
+                card.style.borderColor = 'var(--border-dark)';
+                card.style.backgroundColor = 'var(--inner-dark)';
+
+                let icon = card.querySelector('.role-icon i');
+                if (icon) icon.style.color = 'var(--text-muted)';
             });
 
             cardElement.style.borderColor = 'var(--primary-red)';
-            cardElement.style.backgroundColor = '#241414';
-            cardElement.querySelector('.role-icon').style.color = 'var(--primary-red)';
+            cardElement.style.backgroundColor = 'var(--tint-red)';
+
+            let activeIcon = cardElement.querySelector('.role-icon i');
+            if (activeIcon) activeIcon.style.color = 'var(--primary-red)';
 
             document.getElementById('selectedRoleInput').value = role;
 
