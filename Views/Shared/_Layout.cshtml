@@ -34,7 +34,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-item-link">
+                    <a asp-action="Team" asp-controller="Home" 
+                        class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Team" ? "active" : "")">
                         <i class="bi bi-people"></i> My Team
                     </a>
                 </li>

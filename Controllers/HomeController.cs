@@ -51,5 +51,18 @@ namespace TETHER.Controllers
 
             return View(dummyTask);
         }
+
+        public IActionResult Team()
+        {
+            var Team = new List<TeamMember>
+            {
+                new TeamMember { Id = 1, Name = "REINA CHLOE D. MAGPANTAY", Role = "Project Manager", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
+                new TeamMember { Id = 1, Name = "JOHANNA ANGELA P. ESTALILLA", Role = "Back-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
+                new TeamMember { Id = 1, Name = "SARAH MAE D.C. HARINA", Role = "Front-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
+                new TeamMember { Id = 1, Name = "JOSIAH ZACHARY Q. SY", Role = "Front-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
+            };
+
+            return View(Team);
+        }
     }
 }
