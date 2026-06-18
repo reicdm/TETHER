@@ -1,0 +1,219 @@
+﻿body {
+}
+
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-black);
+    color: var(--text-light);
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--card-black);
+    border-right: 1px solid var(--border-dark);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left:0;
+    z-index: 100;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-navbar {
+    height: 70px;
+    background-color: var(--card-black);
+    border-bottom: 1px solid var(--border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+}
+
+.search-bar {
+    background-color: var(--bg-black) !important;
+    border: 1px solid var(--border-black);
+    color: var(--text-light) !important;
+    border-radius: 8px;
+    width: 400px;
+    padding: 8px 16px;
+    transition: border-color 0.2s ease;
+}
+
+.search-bar:hover {
+    background-color: var(--bg-black) !important;
+    border-color: var(--text-muted);
+}
+
+.search-bar:focus {
+    background-color: var(--bg-black) !important;
+    border-color: var(--primary-red) !important;
+    color: var(--tect-light) !important;
+    box-shadow: none !important;
+    outline: none;
+}
+
+.search-bar::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+
+.content-body {
+    padding: 2.5rem;
+    flex: 1;
+}
+
+/* NAVIGATION */
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 3rem 0 auto 0;
+}
+
+.nav-item-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: var(--text-muted) !important;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.nav-item-link i {
+    color: var(--text-muted) !important;
+    font-size: 1.25rem;
+    margin-right: 12px;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-item-link.active {
+    background-color: var(--tint-red) !important;
+    color: var(--primary-red) !important;
+}
+
+.nav-item-link.active i {
+    color: var(--primary-red) !important;
+}
+
+.nav-item-link:hover:not(.active) {
+    color: var(--text-light) !important;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-item-link.active {
+    background-color: var(--tint-red) !important;
+    color: var(--primary-red) !important;
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: 1px solid var(--border-dark);
+    color: var(--text-muted);
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08rem;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    border-color: var(--primary-red);
+    color: var(--text-light);
+    background-color: rgba(211, 47, 47, 0.1);
+}
+
+/* KANBAN BOARD: TASKS */
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.kanban-column {
+    background-color: var(--inner-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 1.25rem;
+
+    height: 65vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.kanban-column::-webkit-scrollbar {
+    width: 6px;
+}
+
+.kanban-column::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.kanban-column::-webkit-scrollbar-thumb {
+    background-color: var(--border-dark);
+    border-radius: 20px;
+}
+
+.kanban-column::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.column-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.column-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-light);
+}
+
+.task-card {
+    background-color: var(--card-black);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.task-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+}
+
+.badge-priority {
+    background-color: rgba(211, 47, 47, 0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(211, 47, 47, 0.3);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+}

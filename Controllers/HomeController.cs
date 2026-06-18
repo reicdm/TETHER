@@ -26,5 +26,30 @@ namespace TETHER.Controllers
         {
             return View();
         }
+
+        public IActionResult Dashboard(string role)
+        {
+            ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
+
+            var dummyTask = new List<TaskItem>();
+
+            // ASSIGNED
+            for (int i = 1; i <= 3; i++)
+                dummyTask.Add(new TaskItem { Id = i, Title = "Sample Title", Status = "Assigned" });
+
+            // IN PROGRESS
+            for (int i = 4; i <= 9; i++)
+                dummyTask.Add(new TaskItem { Id = i, Title = "Sample Title", Status = "Progress" });
+
+            // FOR APPROVAL
+            for (int i = 1; i <= 2; i++)
+                dummyTask.Add(new TaskItem { Id = i + 9, Title = "Sample Title", Status = "Approval" });
+
+            // DONE
+            for (int i = 1; i <= 10; i++)
+                dummyTask.Add(new TaskItem { Id = i + 11, Title = "Sample Title", Status = "Done" });
+
+            return View(dummyTask);
+        }
     }
 }
