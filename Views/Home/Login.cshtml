@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+    Layout = null;
+
+    var selectedRole = Context.Request.Query["role"].ToString();
+    var roleDisplay = selectedRole == "PM" ? "Project Manager" : "Team Member";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TETHER</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    </head>
+
+    <body>
+
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card p-5 text-center shadow-lg auth-container">
+
+            <h2 class="mb-5 text-uppercase auth-title">Sign In</h2>
+            <p class="mb-5 text-uppercase fs-6 tracking-wider" style="color: var(--primary-red); font-weight: 600;">
+                @roleDisplay Portal
+            </p>
+
+            
+
+        </div>
+    </div>
+
+
+    </body>
+</html>

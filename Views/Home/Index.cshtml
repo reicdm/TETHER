@@ -1,8 +1,75 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Select Role";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TETHER</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+    </head>
+
+    <body>
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="card p-5 text-center shadow-lg auth-container">
+
+        <h2 class="mb-5 text-uppercase auth-title">Select Role</h2>
+
+        <form asp-action="Login" asp-controller="Home" method="get" id="roleForm">
+            <input type="hidden" id="selectedRoleInput" name="role" value="" />
+
+            <div class="row g-4 mb-5 justify-content-center">
+                <div class="col-6 col-sm-5">
+                    <div class="role-card p-4 d-flex flex-column align-items-center justify-content-center" onclick="selectRole('PM', this)">
+                        <div class="role-icon mb-3">💼</div>
+                        <span style="color: var(--text-light); font-weight: 500;">Project Manager</span>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-5">
+                    <div class="role-card p-4 d-flex flex-column align-items-center justify-content-center" onclick="selectRole('Member', this)">
+                        <div class="role-icon mb-3">👥</div>
+                        <span style="color: var(--text-light); font-weight: 500;">Team Member</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="nextButton" class="btn text-uppercase py-3 w-100 btn-next" disabled>
+                Next
+            </button>
+        </form>
+
+    </div>
 </div>
+
+    <script>
+        function selectRole(role, cardElement) {
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.style.borderColor = '#333';
+                card.style.backgroundColor = '#1a1a1a';
+                card.querySelector('.role-icon').style.color = 'var(--text-muted)';
+            });
+
+            cardElement.style.borderColor = 'var(--primary-red)';
+            cardElement.style.backgroundColor = '#241414';
+            cardElement.querySelector('.role-icon').style.color = 'var(--primary-red)';
+
+            document.getElementById('selectedRoleInput').value = role;
+
+            const nextBtn = document.getElementById('nextButton');
+            nextBtn.removeAttribute('disabled');
+            nextBtn.style.backgroundColor = 'var(--primary-red)';
+            nextBtn.style.color = '#fff';
+            nextBtn.style.borderColor = 'transparent';
+        }
+    </script>
+
+    </body>
+</html>

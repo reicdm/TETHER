@@ -1,3 +1,18 @@
+:root {
+    --bg-black: #121212;
+    --card-black: #1e1e1e;
+
+    --inner-dark: #1a1a1a;
+    --border-dark: #333333;
+
+    --primary-red: #d32f2f;
+    --accent-red: #ff5252;
+    --tint-red: #241414;
+
+    --text-light: #f5f5f5;
+    --text-muted: #a0a0a0;
+}
+
 html {
   font-size: 14px;
 }
