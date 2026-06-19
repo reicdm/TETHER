@@ -16,6 +16,7 @@
     @foreach (var member in Model)
     {
         <div class="team-card">
+            <!-- PROFILE IMAGE -->
             <div class="team-image-wrapper">
                 <img src="@(string.IsNullOrEmpty(member.ProfileImageUrl) ? "/images/member-image/default.jpg" : member.ProfileImageUrl)"
                     class="team-member-photo" alt="Profile Photo" />
@@ -24,13 +25,22 @@
             </div>
 
             <div class="team-info-body">
+                <!-- PERSONAL GMAIL -->
                 <div class="info-row">
-                    <img src="~/images/icon-image/gmail-logo.svg" class="info-icon" asp-append-version="true" alt="Gmail" />
-                    <p class="info-text">@member.Email</p>
+                    <i class="bi bi-envelope-fill info-icon"></i>
+                    <p class="info-text">@member.PersonalGmail</p>
                 </div>
+
+                <!-- SCHOOL GMAIL -->
                 <div class="info-row">
-                    <img src="~/images/icon-image/figma-logo.svg" class="info-icon" asp-append-version="true" alt="Figma" />
-                    <p class="info-text">@member.Figma</p>
+                    <i class="bi bi-mortarboard-fill info-icon"></i>
+                    <p class="info-text">@member.SchoolGmail</p>
+                </div>
+
+                <!-- GITHUB USERNAME -->
+                <div class="info-row">
+                    <i class="bi bi-github info-icon"></i>
+                    <p class="info-text">@member.GithubUsername</p>
                 </div>
             </div>
         </div>

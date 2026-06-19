@@ -88,8 +88,10 @@
 }
 
 .info-icon {
-    width: auto;
+    font-size: 1rem;
+    width: 16px;
     height: 16px;
+    color: white;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -102,4 +104,11 @@
     font-weight: 500;
     margin: 0;
     word-break: break-all;
+}
+
+.info-text .text-label {
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-right: 2px;
 }

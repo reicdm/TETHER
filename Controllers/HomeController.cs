@@ -56,10 +56,42 @@ namespace TETHER.Controllers
         {
             var Team = new List<TeamMember>
             {
-                new TeamMember { Id = 1, Name = "REINA CHLOE D. MAGPANTAY", Role = "Project Manager", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
-                new TeamMember { Id = 1, Name = "JOHANNA ANGELA P. ESTALILLA", Role = "Back-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
-                new TeamMember { Id = 1, Name = "SARAH MAE D.C. HARINA", Role = "Front-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
-                new TeamMember { Id = 1, Name = "JOSIAH ZACHARY Q. SY", Role = "Front-end Developer", Email = "sample@gmail.com", Figma = "sample@gmail.com" },
+                new TeamMember 
+                { 
+                    Id = 1, 
+                    Name = "REINA CHLOE D. MAGPANTAY", 
+                    Role = "Project Manager", 
+                    PersonalGmail = "sample@gmail.com", 
+                    SchoolGmail = "sample@gmail.com",
+                    GithubUsername = "sample"
+                },
+                new TeamMember 
+                { 
+                    Id = 2, 
+                    Name = "JOHANNA ANGELA P. ESTALILLA", 
+                    Role = "Back-end Developer", 
+                    PersonalGmail = "sample@gmail.com", 
+                    SchoolGmail = "sample@gmail.com",
+                    GithubUsername = "sample"
+                },
+                new TeamMember 
+                { 
+                    Id = 3, 
+                    Name = "SARAH MAE D.C. HARINA", 
+                    Role = "Front-end Developer", 
+                    PersonalGmail = "sample@gmail.com", 
+                    SchoolGmail = "sample@gmail.com",
+                    GithubUsername = "sample"
+                },
+                new TeamMember 
+                { 
+                    Id = 4, 
+                    Name = "JOSIAH ZACHARY Q. SY", 
+                    Role = "Front-end Developer", 
+                    PersonalGmail = "sample@gmail.com", 
+                    SchoolGmail = "sample@gmail.com",
+                    GithubUsername = "sample"
+                },
             };
 
             return View(Team);
