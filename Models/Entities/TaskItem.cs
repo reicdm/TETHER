@@ -8,14 +8,14 @@ namespace TETHER.Models.Entities
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
 
-        public string PriorityLevelId { get; set; } = string.Empty;
+        public int PriorityLevelId { get; set; } 
         public PriorityLevel? PriorityLevel { get; set; }
 
         public DateTime? Deadline { get; set; }
         public string DocsLink { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
-        public string StatusId { get; set; } = string.Empty;
+        public int StatusId { get; set; } 
         public Status? Status { get; set; }
 
         public int PmId { get; set; }
