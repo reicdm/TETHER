@@ -17,6 +17,8 @@
     {
         <div class="team-card">
             <div class="team-image-wrapper">
+                <img src="@(string.IsNullOrEmpty(member.ProfileImageUrl) ? "/images/member-image/default.jpg" : member.ProfileImageUrl)"
+                    class="team-member-photo" alt="Profile Photo" />
                 <h3 class="team-name text-uppercase">@member.Name</h3>
                 <p class="team-role">@member.Role</p>
             </div>
