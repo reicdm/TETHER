@@ -37,13 +37,13 @@ namespace TETHER.Controllers
             for (int i = 1; i <= 3; i++)
                 dummyTask.Add(new TaskItem { Id = i, Title = "Sample Title", Status = "Assigned" });
 
-            // IN PROGRESS
+            // PENDING
             for (int i = 4; i <= 9; i++)
-                dummyTask.Add(new TaskItem { Id = i, Title = "Sample Title", Status = "Progress" });
+                dummyTask.Add(new TaskItem { Id = i, Title = "Sample Title", Status = "Pending" });
 
-            // FOR APPROVAL
+            // IN PROGRESS
             for (int i = 1; i <= 2; i++)
-                dummyTask.Add(new TaskItem { Id = i + 9, Title = "Sample Title", Status = "Approval" });
+                dummyTask.Add(new TaskItem { Id = i + 9, Title = "Sample Title", Status = "Progress" });
 
             // DONE
             for (int i = 1; i <= 10; i++)

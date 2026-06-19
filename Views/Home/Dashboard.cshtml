@@ -7,8 +7,8 @@
     bool isPM = (currentRole == "PM");
 
     var assignedTasks = Model.Where(t => t.Status == "Assigned").ToList();
+    var pendingTasks = Model.Where(t => t.Status == "Pending").ToList();
     var progressTasks = Model.Where(t => t.Status == "Progress").ToList();
-    var approvalTasks = Model.Where(t => t.Status == "Approval").ToList();
     var doneTasks = Model.Where(t => t.Status == "Done").ToList();
 }
 
@@ -45,13 +45,13 @@
         }
     </div>
 
-    <!-- COLUMN 2: IN PROGRESS -->
+    <!-- COLUMN 2: PENDING -->
     <div class="kanban-column">
         <div class="column-header">
-            <span class="column-title text-uppercase">In Progress</span>
-            <span class="column-count">@progressTasks.Count</span>
+            <span class="column-title text-uppercase">Pending</span>
+            <span class="column-count">@pendingTasks.Count</span>
         </div>
-        @foreach (var task in progressTasks)
+        @foreach (var task in pendingTasks)
         {
             <div class="task-card" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
@@ -60,13 +60,13 @@
         }
     </div>
 
-    <!-- COLUMN 3: FOR APPROVAL -->
+    <!-- COLUMN 3: IN PROGRESS -->
     <div class="kanban-column">
         <div class="column-header">
-            <span class="column-title text-uppercase">For Approval</span>
-            <span class="column-count">@approvalTasks.Count</span>
+            <span class="column-title text-uppercase">In Progress</span>
+            <span class="column-count">@progressTasks.Count</span>
         </div>
-        @foreach (var task in approvalTasks)
+        @foreach (var task in progressTasks)
         {
             <div class="task-card" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
