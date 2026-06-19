@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model TETHER.Models.CalendarViewModel
 @{
+    ViewData["Title"] = "Calendar";
+    Layout = "_Layout";
 }
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/calendar.css" />
+}
+
+<div class="mb-5">
+    <h1 class="page-title">Calendar</h1>
+</div>
+
+<div class="grid-nav">
+    <a class="btn" asp-action="Calendar" asp-route-year="@Model.Prev.Year" asp-route-month="@Model.Prev.Month">← @Model.Prev.ToString("MMM")</a>
+    <span class="grid-month-title">@Model.MonthName</span>
+    <a class="btn" asp-action="Calendar" asp-route-year="@Model.Next.Year" asp-route-month="@Model.Next.Month">@Model.Next.ToString("MMM") →</a>
+</div>
+
+<div class="calendar-card">
+    <div class="weekday-header">
+        @foreach (var d in new[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" })
+        {
+            <span>@d</span>
+        }
+    </div>
+
+    <div class="calendar-grid">
+        @for (int i = 0; i < Model.FirstDayOfWeek; i++)
+        {
+            <div class="cal-cell empty"></div>
+        }
+
+        @for (int d = 1; d <= Model.DaysInMonth; d++)
+        {
+            if (Model.Entries.TryGetValue(d, out var e))
+            {
+                <div class="cal-cell filled" style="background:@e.Color"
+                     title="@e.Date.ToString("MMM d"): @e.Highlight (@e.Stars)">
+                    <span class="cal-day">@d</span>
+                    <span class="cal-emoji">@e.Emoji</span>
+                </div>
+            }
+            else
+            {
+                <div class="cal-cell">
+                    <span class="cal-day">@d</span>
+                </div>
+            }
+        }
+    </div>
+</div>
