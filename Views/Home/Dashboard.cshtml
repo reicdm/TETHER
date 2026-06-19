@@ -5,11 +5,12 @@
 
     var currentRole = ViewBag.Role as string;
     bool isPM = (currentRole == "PM");
+    string currentUser = ViewBag.CurrentUser ?? "";
 
-    var assignedTasks = Model.Where(t => t.Status == "Assigned").ToList();
-    var progressTasks = Model.Where(t => t.Status == "Progress").ToList();
-    var approvalTasks = Model.Where(t => t.Status == "Approval").ToList();
-    var doneTasks = Model.Where(t => t.Status == "Done").ToList();
+    var assignedTasks = Model.Where(t => t.Status == "Assigned" || t.Status == "Pending" || t.Status == "Progress").ToList();
+    var pendingTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Pending").ToList();
+    var progressTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Progress").ToList();
+    var doneTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Done").ToList();
 }
 
 @section Styles {
@@ -17,7 +18,7 @@
 }
 
 <div class="d-flex justify-content-between align-items-center mb-5">
-    <h1 class="text-white m-0" style="font-size: 2.2rem; font-weight: 800;">My Tasks</h1>
+    <h1 class="page-title">Task Distribution</h1>
 
     @if (isPM)
     {
@@ -38,14 +39,29 @@
         </div>
         @foreach (var task in assignedTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
         }
     </div>
 
-    <!-- COLUMN 2: IN PROGRESS -->
+    <!-- COLUMN 2: PENDING -->
+    <div class="kanban-column">
+        <div class="column-header">
+            <span class="column-title text-uppercase">Pending</span>
+            <span class="column-count">@pendingTasks.Count</span>
+        </div>
+        @foreach (var task in pendingTasks)
+        {
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
+                <div class="task-title">@task.Title</div>
+                <span class="badge-priority text-uppercase">@task.Priority</span>
+            </div>
+        }
+    </div>
+
+    <!-- COLUMN 3: IN PROGRESS -->
     <div class="kanban-column">
         <div class="column-header">
             <span class="column-title text-uppercase">In Progress</span>
@@ -53,22 +69,7 @@
         </div>
         @foreach (var task in progressTasks)
         {
-            <div class="task-card" data-id="@task.Id">
-                <div class="task-title">@task.Title</div>
-                <span class="badge-priority text-uppercase">@task.Priority</span>
-            </div>
-        }
-    </div>
-
-    <!-- COLUMN 3: FOR APPROVAL -->
-    <div class="kanban-column">
-        <div class="column-header">
-            <span class="column-title text-uppercase">For Approval</span>
-            <span class="column-count">@approvalTasks.Count</span>
-        </div>
-        @foreach (var task in approvalTasks)
-        {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
@@ -83,7 +84,7 @@
         </div>
         @foreach (var task in doneTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>

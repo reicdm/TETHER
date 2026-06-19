@@ -81,3 +81,38 @@
     padding: 3px 8px;
     border-radius: 4px;
 }
+
+.task-card.card-high {
+    background-color: rgba(211, 47, 47, 0.12);
+    border: 1px solid rgba(211, 47, 47, 0.35);
+}
+
+.card-high .badge-priority {
+    background-color: rgba(211, 47, 47, 0.2);
+    color: #ff5252;
+    border: 1px solid rgba(211, 47, 47, 0.4);
+}
+
+/* MEDIUM PRIORITY CARDS (Ocean Blue Theme) */
+.task-card.card-medium {
+    background-color: rgba(28, 61, 90, 0.4);
+    border: 1px solid #234b6e;
+}
+
+.card-medium .badge-priority {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* LOW PRIORITY CARDS (Muted Dark Charcoal Theme) */
+.task-card.card-low {
+    background-color: #222222;
+    border: 1px solid #3a3a3a;
+}
+
+.card-low .badge-priority {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #b0b0b0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TETHER.Models.TeamMember>
+@{
+    ViewData["Title"] = "My Team";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/team.css" asp-append-version="true" />
+}
+
+<div class="mb-5">
+    <h1 class="page-title">My Team</h1>
+</div>
+
+<div class="team-grid">
+    @foreach (var member in Model)
+    {
+        <div class="team-card">
+            <!-- PROFILE IMAGE -->
+            <div class="team-image-wrapper">
+                <img src="@(string.IsNullOrEmpty(member.ProfileImageUrl) ? "/images/member-image/default.jpg" : member.ProfileImageUrl)"
+                    class="team-member-photo" alt="Profile Photo" />
+                <h3 class="team-name text-uppercase">@member.Name</h3>
+                <p class="team-role">@member.Role</p>
+            </div>
+
+            <div class="team-info-body">
+                <!-- PERSONAL GMAIL -->
+                <div class="info-row">
+                    <i class="bi bi-envelope-fill info-icon"></i>
+                    <p class="info-text">@member.PersonalGmail</p>
+                </div>
+
+                <!-- SCHOOL GMAIL -->
+                <div class="info-row">
+                    <i class="bi bi-mortarboard-fill info-icon"></i>
+                    <p class="info-text">@member.SchoolGmail</p>
+                </div>
+
+                <!-- GITHUB USERNAME -->
+                <div class="info-row">
+                    <i class="bi bi-github info-icon"></i>
+                    <p class="info-text">@member.GithubUsername</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
