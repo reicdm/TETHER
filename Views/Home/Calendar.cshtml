@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Calendar";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/calendar.css" />
+}
+
+<div class="mb-5">
+    <h1 class="page-title">Calendar</h1>
+</div>
+
+<div class="page-layout">
+    <div class="calendar-cont">
+        <div class="grid-nav">
+            <a class="btn-month" asp-action="Calendar" asp-route-year="@Model.Prev.Year" asp-route-month="@Model.Prev.Month">← @Model.Prev.ToString("MMM")</a>
+            <span class="grid-month-title">@Model.MonthName</span>
+            <a class="btn-month" asp-action="Calendar" asp-route-year="@Model.Next.Year" asp-route-month="@Model.Next.Month">@Model.Next.ToString("MMM") →</a>
+        </div>
+
+        <div class="calendar-card">
+            <div class="weekday-header">
+                @foreach (var d in new[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" })
+                {
+                    <span>@d</span>
+                }
+            </div>
+
+            <div class="calendar-grid">
+                @for (int i = 0; i < Model.FirstDayOfWeek; i++)
+                {
+                    <div class="cal-cell empty"></div>
+                }
+
+                @for (int d = 1; d <= Model.DaysInMonth; d++)
+                {
+                    if (Model.Entries.TryGetValue(d, out var e))
+                    {
+                        <div class="cal-cell filled" style="background:@e.Color"
+                             title="@e.Date.ToString("MMM d"): @e.Highlight (@e.Stars)">
+                            <span class="cal-day">@d</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="cal-cell">
+                            <span class="cal-day">@d</span>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="todo-cont">
+        <h2 class="todo-title">To-do List</h2>
+        <!-- to-do items go here -->
+        <div class="todo-card">
+            <div class="task-card card-high">
+                <div class="task-title">Task Name</div>
+                <span class="badge-priority text-uppercase">"Task Name"</span>
+            </div>
+        </div>
+    </div>
+</div>

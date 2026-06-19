@@ -29,7 +29,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-item-link">
+                    <a asp-action="Calendar" asp-controller="Home"
+                        class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Calendar" ? "active" : "")">
                         <i class="bi bi-calendar3"></i> Calendar
                     </a>
                 </li>

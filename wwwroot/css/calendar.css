@@ -1,0 +1,195 @@
+﻿/* BUTTON */
+.btn-month {
+    min-width: 80px;
+    display: inline-block;
+    padding: .5rem 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background .15s;
+
+    border: 1px solid var(--primary-red);
+    background-color: var(--primary-red);
+    color: var(--text-light);
+}
+
+.btn-month:hover {
+    background: var(--tint-red);
+    color: var(--primary-red);
+    border-color: var(--accent-red);
+}
+
+/* PAGE LAYOUT */
+.page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.calendar-cont {
+    flex: 3 11 600px;
+    max-width: 1200px;
+    min-width: 0;
+}
+
+.todo-cont {
+    flex: 1 1 280px;
+    background: var(--card-black);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CALENDAR */
+.grid-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.grid-month-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-red);
+}
+
+.calendar-card {
+    background: var(--card-black);
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.weekday-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 1rem;
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+}
+
+.cal-cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background: var(--tint-red);
+    border: 1px solid var(--primary-red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    cursor: default;
+    transition: transform .12s;
+}
+
+.cal-cell.empty {
+    background: transparent;
+    border: transparent;
+}
+
+.cal-cell.filled {
+    color: var(--primary-red);
+    cursor: pointer;
+}
+
+.cal-cell.filled:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.cal-day {
+    font-size: 1rem;
+    opacity: .8;
+}
+
+/* TO DO LIST */
+.todo-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--primary-red);
+}
+
+.todo-card {
+    flex: 1;
+    border-radius: 12px;
+    padding: 1.25rem;
+    min-height: 1000px;
+    overflow-y: auto;
+}
+
+.task-card.card-high {
+    background-color: rgba(211, 47, 47, 0.12);
+    border: 1px solid rgba(211, 47, 47, 0.35);
+}
+
+.task-card {
+    background-color: var(--card-black);
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.task-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+}
+
+.badge-priority {
+    background-color: rgba(211, 47, 47, 0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(211, 47, 47, 0.3);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* HIGH */
+.card-high .badge-priority {
+    background-color: rgba(211, 47, 47, 0.2);
+    color: #ff5252;
+    border: 1px solid rgba(211, 47, 47, 0.4);
+}
+
+/* MEDIUM */
+.task-card.card-medium {
+    background-color: rgba(28, 61, 90, 0.4);
+    border: 1px solid #234b6e;
+}
+
+.card-medium .badge-priority {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* LOW PRIORITY */
+.task-card.card-low {
+    background-color: #222222;
+    border: 1px solid #3a3a3a;
+}
+
+.card-low .badge-priority {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #b0b0b0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}

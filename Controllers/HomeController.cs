@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Globalization;
 using TETHER.Models;
 using TETHER.Models.Entities;
 using TETHER.Data;
@@ -72,7 +73,24 @@ namespace TETHER.Controllers
 
             return View(Tasks);
         }
+        public IActionResult Calendar(int? year, int? month) 
+        {
+            int y = year ?? DateTime.Today.Year;
+            int m = month ?? DateTime.Today.Month;
 
+            var model = new CalendarViewModel
+            {
+                Year = y,
+                Month = m,
+                Prev = new DateTime(y, m, 1).AddMonths(-1),
+                Next = new DateTime(y, m, 1).AddMonths(1),
+                DaysInMonth = DateTime.DaysInMonth(y, m),
+                FirstDayOfWeek = (int)new DateTime(y, m, 1).DayOfWeek,
+                Entries = new Dictionary<int, CalendarEntry>()
+            };
+
+            return View(model);
+        }
         public IActionResult Team()
         {
             var Team = _context.TeamMembers
@@ -81,5 +99,13 @@ namespace TETHER.Controllers
 
             return View(Team);
         }
+        public IActionResult Profile_Hanna() { return View(); }
+        public IActionResult Profile_Rei() { return View(); }
+        public IActionResult Profile_Sarah() { return View(); }
+        public IActionResult Profile_Zach() { return View(); }
+
+        public IActionResult AddTask() { return View(); }
+
+        public IActionResult UpdateTask() { return View(); }
     }
 }
