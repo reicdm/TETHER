@@ -13,7 +13,7 @@
 <div>
     <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
         <div class="card p-5 text-center shadow-lg form-container">
-            <h2 class="mb-5 text-uppercase form-title">Create New Task</h2>
+            <h2 class="mb-5 text-uppercase form-title">Completed Task</h2>
 
             <form asp-action="Dashboard" asp-controller="Home" method="get">
                 <!-- PRIORITY -->
@@ -23,15 +23,15 @@
                             <label class="task-label" style="white-space: nowrap;">Priority Level</label>
                             <div class="priority-grid">
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="High" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="High" class="d-none" readonly/>
                                     High
                                 </label>
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="Medium" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="Medium" class="d-none" readonly/>
                                     Medium
                                 </label>
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="Low" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="Low" class="d-none" readonly/>
                                     Low
                                 </label>
                             </div>
@@ -45,7 +45,7 @@
                     <!-- TASK NAME -->
                     <div class="task-input-group text-start">
                         <label class="task-label">Task Name</label>
-                        <input type="text" class="task-form-control" placeholder="Add Title" required />
+                        <input type="text" class="task-form-control" placeholder="Add Title" readonly />
                     </div>
 
                     <!-- DEADLINE -->
@@ -54,12 +54,12 @@
                         <div class="d-flex align-items-center gap-2">
                             <!-- START DATE -->
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input type="date" class="task-form-control" readonly />
                             </div>
                             <!-- END DATE -->
                             <span class="text-white">to</span>
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input type="date" class="task-form-control" readonly />
                             </div>
                         </div>
                     </div>
@@ -69,19 +69,19 @@
                         <label class="task-label">Assigned to</label>
                         <div class="member-grid">
                             <label class="badge-member mem-hanna">
-                                <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" />
+                                <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" readonly />
                                 Johanna Angela P. Estalilla
                             </label>
                             <label class="badge-member mem-sara">
-                                <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" />
+                                <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" readonly />
                                 Sarah Mae D.C. Harina
                             </label>
                             <label class="badge-member mem-rei">
-                                <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" />
+                                <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" readonly />
                                 Reina Chloe D. Magpantay
                             </label>
                             <label class="badge-member mem-zach">
-                                <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" />
+                                <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" readonly />
                                 Josiah Zachary Q. Sy
                             </label>
                         </div>
@@ -93,14 +93,14 @@
                     <div class="divider-input">
                         <div class="d-flex align-items-center gap-2">
                             <i class="bi bi-link-45deg link-icon"></i>
-                            <input type="text" class="task-form-control" placeholder="Add Link (optional)" />
+                            <input type="text" class="task-form-control" placeholder="Add Link (optional)" readonly />
                         </div>
                     </div>
 
                     <!-- DESCRIPTION -->
                     <div class="d-flex align-items-start gap-2">
                         <i class="bi bi-list editor-icon"></i>
-                        <textarea class="task-form-control" placeholder="Add Description (optional)" rows="5"></textarea>
+                        <textarea class="task-form-control" placeholder="Add Description (optional)" rows="5" readonly></textarea>
                     </div>
                 </div>
 
@@ -112,21 +112,18 @@
                         <label class="task-label">Update Task Status</label>
                         <div class="status-grid">
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none" checked/>
+                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none" readonly />
                                 Pending
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none" disabled/>
+                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none" readonly />
                                 In Progress
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none" disabled/>
+                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none" checked readonly />
                                 Completed
                             </label>
                         </div>
-                        <small id="ratingHint" style="color:#999; font-size:.8rem; margin-top:.3rem; display:block;">
-                            Only available when updating the task.
-                        </small>
                     </div>
                 </div>
 

@@ -152,5 +152,6 @@ namespace TETHER.Controllers
         public IActionResult AddTask() { return View(); }
 
         public IActionResult UpdateTask() { return View(); }
+        public IActionResult DoneTask() { return View(); }
     }
 }
