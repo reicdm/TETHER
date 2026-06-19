@@ -1,6 +1,6 @@
-﻿namespace TETHER.Models
+﻿namespace TETHER.Models.Entities
 {
-    public class Status
+    public class PriorityLevel
     {
         public int Id { get; set; }
 

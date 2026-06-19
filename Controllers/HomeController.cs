@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TETHER.Models;
+using TETHER.Models.Entities;
 
 namespace TETHER.Controllers
 {

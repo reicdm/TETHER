@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TETHER.Models
+namespace TETHER.Models.Entities
 {
     public class TeamMember
     {

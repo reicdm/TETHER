@@ -1,4 +1,4 @@
-﻿namespace TETHER.Models
+﻿namespace TETHER.Models.Entities
 {
     public class TaskItemAssignment
     {
