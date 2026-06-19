@@ -54,15 +54,19 @@ namespace TETHER.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Dashboard", new { role = member.Role?.Name });
+            HttpContext.Session.SetString("Role", member.Role?.Name);
+            HttpContext.Session.SetInt32("UserId", member.Id);
+
+            return RedirectToAction("Dashboard");
         }
 
-        public IActionResult Dashboard(string role)
+        public IActionResult Dashboard()
         {
-            ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
+            var role = HttpContext.Session.GetString("Role");
+            var userId = HttpContext.Session.GetInt32("UserId");
 
-            int currentUserId = 1;
-            ViewBag.CurrentUserId = currentUserId;
+            ViewBag.Role = role;
+            ViewBag.CurrentUserId = userId;
 
             var Tasks = _context.TaskItems
                 .Include(t => t.Status)
