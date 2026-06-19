@@ -39,10 +39,10 @@
         </div>
         @foreach (var task in assignedTasks)
         {
-            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
-            </div>
+            </a>
         }
     </div>
 
@@ -54,10 +54,10 @@
         </div>
         @foreach (var task in pendingTasks)
         {
-            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
-            </div>
+            </a>
         }
     </div>
 
@@ -69,10 +69,10 @@
         </div>
         @foreach (var task in progressTasks)
         {
-            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
-            </div>
+            </a>
         }
     </div>
 
@@ -84,10 +84,10 @@
         </div>
         @foreach (var task in doneTasks)
         {
-            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
-            </div>
+            </a>
         }
     </div>
 

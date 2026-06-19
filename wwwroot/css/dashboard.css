@@ -69,12 +69,18 @@
 }
 
 .task-card {
+    text-decoration: none;
     background-color: var(--card-black);
     border: 1px solid var(--border-dark);
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 0.75rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.task-card:hover {
+    transform: scale(1.05);
+    z-index: 2;
 }
 
 .task-title {
