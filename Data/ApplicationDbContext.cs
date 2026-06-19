@@ -50,6 +50,7 @@ namespace TETHER.Data
                     PersonalGmail = "rcdrmagpantay@gmail.com",
                     SchoolGmail = "reinachloedmagpantay@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "reicdm",
+                    Password = "pm012345",
                     ProfileImageUrl = "/images/member-image/rei.jpg",
                     PmId = null 
                 },
@@ -63,6 +64,7 @@ namespace TETHER.Data
                     PersonalGmail = "pupbsitestalillajohanna@gmail.com",
                     SchoolGmail = "johannaangelapestalilla@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "johannaestalilla1205",
+                    Password = "member01",
                     ProfileImageUrl = "/images/member-image/hanna.jpg",
                     PmId = 1
                 },
@@ -76,6 +78,7 @@ namespace TETHER.Data
                     PersonalGmail = "sarahmaeharina@gmail.com",
                     SchoolGmail = "sarahmaedharina@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "smhix",
+                    Password = "member02",
                     ProfileImageUrl = "/images/member-image/sarah.jpg",
                     PmId = 1 
                 },
@@ -89,6 +92,7 @@ namespace TETHER.Data
                     PersonalGmail = "bsitsyjosiah@gmail.com",
                     SchoolGmail = "josiahzacharyqsy@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "znacku",
+                    Password = "member03",
                     ProfileImageUrl = "/images/member-image/zach.jpg",
                     PmId = 1 
                 }

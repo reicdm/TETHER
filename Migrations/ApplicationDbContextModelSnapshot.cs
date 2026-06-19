@@ -181,6 +181,10 @@ namespace TETHER.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PersonalGmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -218,6 +222,7 @@ namespace TETHER.Migrations
                             GithubUsername = "reicdm",
                             LastName = "Magpantay",
                             MiddleName = "De Roja",
+                            Password = "pm012345",
                             PersonalGmail = "rcdrmagpantay@gmail.com",
                             ProfileImageUrl = "/images/member-image/rei.jpg",
                             RoleId = 1,
@@ -230,6 +235,7 @@ namespace TETHER.Migrations
                             GithubUsername = "johannaestalilla1205",
                             LastName = "Estalilla",
                             MiddleName = "Quilatan",
+                            Password = "member01",
                             PersonalGmail = "pupbsitestalillajohanna@gmail.com",
                             PmId = 1,
                             ProfileImageUrl = "/images/member-image/hanna.jpg",
@@ -243,6 +249,7 @@ namespace TETHER.Migrations
                             GithubUsername = "smhix",
                             LastName = "Harina",
                             MiddleName = "Dela Cruz",
+                            Password = "member02",
                             PersonalGmail = "sarahmaeharina@gmail.com",
                             PmId = 1,
                             ProfileImageUrl = "/images/member-image/sarah.jpg",
@@ -256,6 +263,7 @@ namespace TETHER.Migrations
                             GithubUsername = "znacku",
                             LastName = "Sy",
                             MiddleName = "Quinones",
+                            Password = "member03",
                             PersonalGmail = "bsitsyjosiah@gmail.com",
                             PmId = 1,
                             ProfileImageUrl = "/images/member-image/zach.jpg",
