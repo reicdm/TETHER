@@ -1,5 +1,6 @@
 ﻿/* BUTTON */
 .btn-month {
+    text-decoration: none;
     min-width: 80px;
     display: inline-block;
     padding: .5rem 1.1rem;
@@ -8,7 +9,6 @@
     font-size: 16px;
     font-weight: 500;
     transition: background .15s;
-
     border: 1px solid var(--primary-red);
     background-color: var(--primary-red);
     color: var(--text-light);
@@ -84,16 +84,18 @@
 .cal-cell {
     aspect-ratio: 1;
     border-radius: 8px;
-    background: var(--tint-red);
-    border: 1px solid var(--primary-red);
+    background: var(--bg-black);
+    border: 1px solid var(--border-dark);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     font-size: 4rem;
     position: relative;
     cursor: default;
     transition: transform .12s;
+    padding: 6px;
+    overflow: hidden;
 }
 
 .cal-cell.empty {
@@ -102,8 +104,10 @@
 }
 
 .cal-cell.filled {
-    color: var(--primary-red);
+    color: var(--text-light);
     cursor: pointer;
+    background: rgb(36, 20, 20, 0.8);
+    border: 1px solid rgb(211, 47, 47, 0.8);
 }
 
 .cal-cell.filled:hover {
@@ -116,7 +120,67 @@
     opacity: .8;
 }
 
+.cal-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.cal-chip {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* HIGH */
+.cal-chip.card-high { 
+    background-color: rgba(211, 47, 47, 0.12);
+    border: 1px solid rgba(211, 47, 47, 0.35); 
+}
+
+.chip-label.title-high {
+    color: #ff5252;
+}
+
+/* MEDIUM */
+.cal-chip.card-medium { 
+    background-color: rgba(28, 61, 90, 0.4);
+    border: 1px solid #234b6e;
+}
+
+.chip-label.title-medium {
+    color: #38bdf8;
+}
+
+/* LOW */
+.cal-chip.card-low { 
+    background-color: #222222;
+    border: 1px solid #3a3a3a;
+}
+
+.chip-label.title-low {
+    color: #b0b0b0;
+}
+
 /* TO DO LIST */
+.task-card,
+.cal-chip {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .todo-title {
     font-size: 1.25rem;
     font-weight: 800;
@@ -125,16 +189,13 @@
 }
 
 .todo-card {
-    flex: 1;
+    flex: 0 1 auto;
     border-radius: 12px;
     padding: 1.25rem;
-    min-height: 1000px;
+    height: 945px;
+    max-height: 945px;
     overflow-y: auto;
-}
-
-.task-card.card-high {
-    background-color: rgba(211, 47, 47, 0.12);
-    border: 1px solid rgba(211, 47, 47, 0.35);
+    overflow-x: hidden;
 }
 
 .task-card {
@@ -146,11 +207,22 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+.task-card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
 .task-title {
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-light);
     margin-bottom: 0.75rem;
+}
+
+.date-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 4px;
 }
 
 .badge-priority {
@@ -164,6 +236,15 @@
 }
 
 /* HIGH */
+.date-title.date-high {
+    color: #ff5252;
+}
+
+.task-card.card-high {
+    background-color: rgba(211, 47, 47, 0.12);
+    border: 1px solid rgba(211, 47, 47, 0.35);
+}
+
 .card-high .badge-priority {
     background-color: rgba(211, 47, 47, 0.2);
     color: #ff5252;
@@ -171,6 +252,10 @@
 }
 
 /* MEDIUM */
+.date-title.date-medium {
+    color: #38bdf8;
+}
+
 .task-card.card-medium {
     background-color: rgba(28, 61, 90, 0.4);
     border: 1px solid #234b6e;
@@ -183,6 +268,10 @@
 }
 
 /* LOW PRIORITY */
+.date-title.date-low {
+    color: #b0b0b0;
+}
+
 .task-card.card-low {
     background-color: #222222;
     border: 1px solid #3a3a3a;

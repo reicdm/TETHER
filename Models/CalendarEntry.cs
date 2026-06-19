@@ -4,10 +4,11 @@ namespace TETHER.Models
 {
     public class CalendarEntry
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; }
-        public string Color { get; set; } = "#cccccc";
-        public string Highlight { get; set; } = "";
-        public int Stars { get; set; }
-        public string Emoji { get; set; } = "";
+        public string Title { get; set; } = string.Empty;
+        public string Priority { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public string AssignedTo { get; set; } = string.Empty;
     }
 }

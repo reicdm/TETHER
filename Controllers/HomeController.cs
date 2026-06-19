@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using TETHER.Models;
 
@@ -59,8 +60,43 @@ namespace TETHER.Controllers
                 Next = new DateTime(y, m, 1).AddMonths(1),
                 DaysInMonth = DateTime.DaysInMonth(y, m),
                 FirstDayOfWeek = (int)new DateTime(y, m, 1).DayOfWeek,
-                Entries = new Dictionary<int, CalendarEntry>()
+                Entries = new Dictionary<int, List<CalendarEntry>>()
             };
+
+            int nextId = 1;
+
+            void AddEntry(int day, string title, string priority, string status, string assignedTo)
+            {
+                if (day < 1 || day > model.DaysInMonth) return;
+
+                if (!model.Entries.ContainsKey(day))
+                    model.Entries[day] = new List<CalendarEntry>();
+
+
+                model.Entries[day].Add(new CalendarEntry
+                {
+                    Id = nextId++,
+                    Date = new DateTime(y, m, day),
+                    Title = title,
+                    Priority = priority,
+                    Status = status,
+                    AssignedTo = assignedTo
+                });
+            }
+
+            AddEntry(1, "IAS1: Activity # 2_Final Term", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
+            AddEntry(5, "CP1: Proposal Defense", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
+            AddEntry(9, "DM: Pass Previous Activies", "Medium", "Progress", "SARAH MAE D.C. HARINA");
+            AddEntry(11, "IAS1: Role Play", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
+            AddEntry(13, "DM: Activity #1", "Medium", "Pending", "SARAH MAE D.C. HARINA");
+            AddEntry(14, "CW: Module 5 Quiz", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
+            AddEntry(14, "CW: Online Discussion Board 5", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
+            AddEntry(16, "ADET: Activity 6 - Project Documentation", "High", "Progress", "REINA CHLOE D. MAGPANTAY");
+            AddEntry(16, "ADET: Final Project", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
+            AddEntry(17, "IAS1: Activity # 3_Final Term", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
+            AddEntry(20, "CP1: Revision Presentation", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
+            AddEntry(22, "CW: Final Exam", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
+
 
             return View(model);
         }
