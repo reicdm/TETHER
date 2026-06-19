@@ -1,13 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 
 namespace TETHER.Models
 {
     public class TaskItem : Controller
     {
         public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Priority { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
-        public string AssignedTo { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+
+        public string PriorityLevelId { get; set; }
+        public PriorityLevel? PriorityLevel { get; set; }
+
+        public string Deadline { get; set; }
+        public string DocsLink { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+
+        public string StatusId { get; set; }
+        public Status? Status { get; set; }
+
+        public int PmId { get; set; }
+        public TeamMember? ProjectManager { get; set; }
+
+        public ICollection<TaskItemAssignment> Assignments { get; set; }
+            = new List<TaskItemAssignment>();
     }
 }
