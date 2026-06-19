@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TETHER.Models.Entities.Auth
+@{
     ViewData["Title"] = "Sign In";
     Layout = null;
 
@@ -27,7 +28,7 @@
                 @roleDisplay Portal
             </p>
 
-            <form asp-action="Dashboard" asp-controller="Home" method="get">
+            <form asp-action="Login" asp-controller="Home" method="post">
                 <div class="auth-input-group text-start">
                     <label class="auth-label">Email</label>
                     <input type="email" class="auth-form-control" placeholder="Enter your email address" required />
@@ -37,6 +38,8 @@
                     <label class="auth-label">Password</label>
                     <input type="password" class="auth-form-control" placeholder="Enter your password" required />
                 </div>
+
+                <input asp-for="Role" type="hidden" value="@selectedRole" />
 
                 <button type="submit" class="btn text-uppercase py-3 w-100 btn-next text-white" style="background-color: var(--primary-red); border-color: transparent;">
                     Login

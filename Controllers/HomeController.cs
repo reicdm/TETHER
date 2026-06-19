@@ -24,10 +24,34 @@ namespace TETHER.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Login(string role) 
+        [HttpGet]
+        public IActionResult Login(string role)
         {
-            ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
-            return View();
+            return View(new Auth
+            {
+                Role = role
+            });
+        }
+
+        [HttpPost]
+        public IActionResult Login(Auth login)
+        {
+            var authMember = _context.Auths
+                .FirstOrDefault(x => x.Email == login.Email);
+
+            if (authMember == null)
+            {
+                ViewBag.Error = "Email not found.";
+                return View(login);
+            }
+
+            if (authMember.Password != login.Password)
+            {
+                ViewBag.Error = "Incorrect password.";
+                return View(login);
+            }
+
+            return RedirectToAction("Dashboard", new { role = authMember.Role });
         }
 
         public IActionResult Dashboard(string role)
