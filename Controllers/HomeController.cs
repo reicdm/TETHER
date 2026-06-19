@@ -90,5 +90,13 @@ namespace TETHER.Controllers
 
             return View(Team);
         }
+        public IActionResult Profile_Hanna() { return View(); }
+        public IActionResult Profile_Rei() { return View(); }
+        public IActionResult Profile_Sarah() { return View(); }
+        public IActionResult Profile_Zach() { return View(); }
+
+        public IActionResult AddTask() { return View(); }
+
+        public IActionResult UpdateTask() { return View(); }
     }
 }

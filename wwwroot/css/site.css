@@ -11,6 +11,30 @@
 
     --text-light: #f5f5f5;
     --text-muted: #a0a0a0;
+
+   /* HANNA */
+   --primary-pink: #ec6fa3;
+--accent-pink: #e0529a;
+--tint-pink: #3a1f2c;
+--light-pink: #f2a8c7;
+
+    /* SARAH */
+    --primary-purple: #905BF4;
+    --accent-purple: #7c3aed;
+    --tint-purple: #1e1825;
+    --light-purple: #C4A6FA;
+
+    /* REI */
+    --primary-blue: #60A5FA;
+    --accent-blue: #3b82f6;
+    --tint-blue: #15192a;
+    --light-blue: #A8CCFC;
+
+    /* ZACH */
+    --primary-green: #4ADE80;
+    --accent-green: #22c55e;
+    --tint-green: #142019;
+    --light-green: #A7F3C8;
 }
 
 .page-title {
