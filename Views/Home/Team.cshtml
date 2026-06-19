@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TETHER.Models.TeamMember>
+﻿@model IEnumerable<TETHER.Models.Entities.TeamMember>
 @{
     ViewData["Title"] = "My Team";
     Layout = "_Layout";
@@ -20,8 +20,8 @@
             <div class="team-image-wrapper">
                 <img src="@(string.IsNullOrEmpty(member.ProfileImageUrl) ? "/images/member-image/default.jpg" : member.ProfileImageUrl)"
                     class="team-member-photo" alt="Profile Photo" />
-                <h3 class="team-name text-uppercase">@member.Name</h3>
-                <p class="team-role">@member.Role</p>
+                <h3 class="team-name text-uppercase">@(member.FirstName + " " + member.LastName)</h3>
+                <p class="team-role">@member.Role?.Name</p>
             </div>
 
             <div class="team-info-body">

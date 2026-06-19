@@ -3,7 +3,7 @@ using System.Net.NetworkInformation;
 
 namespace TETHER.Models.Entities
 {
-    public class TaskItem : Controller
+    public class TaskItem 
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
