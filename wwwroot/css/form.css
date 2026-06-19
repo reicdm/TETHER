@@ -1,0 +1,110 @@
+﻿body {
+    background-color: var(--bg-black) !important;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--card-black);
+    border: 1px solid var(--border-black);
+    border-radius: 16px;
+}
+
+.form-title {
+    color: var(--text-light);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+}
+
+/* TASK FORM */
+.task-input-group {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.task-form-control,
+.link-input{
+    background-color: var(--inner-dark) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-light) !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.task-form-control::placeholder,
+.link-input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.85;
+}
+
+.task-form-control:focus,
+.link-input:focus {
+    border-color: var(--primary-red) !important;
+    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2) !important;
+    outline: none;
+}
+
+.task-label {
+    padding: 0 6px;
+    font-size:1rem;
+    color: var(--text-light);
+}
+
+/* MEMBERS CHECK BOX */
+.member-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge-member {
+    flex: 1 1 0;
+    line-height: 1;
+    min-width: 220px;
+    background-color: var(--inner-dark) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-muted) !important;
+    padding: 12px 14px !important;
+    border-radius: 50px !important;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-member:has(input:checked) {
+    background: var(--tint-red) !important;
+    color: var(--primary-red) !important;
+    border-color: var(--accent-red) !important;
+}
+
+/* PRIOTITY OPTION */
+.badge-priority {
+    background-color: var(--inner-dark) !important;
+    border: 1px solid var(--border-dark) !important;
+    color: var(--text-muted) !important;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.badge-priority:has(input:checked) {
+    background: var(--tint-red) !important;
+    color: var(--primary-red) !important;
+    border-color: var(--accent-red) !important;
+}
+
+.link-icon,
+.editor-icon {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    flex-shrink: 0;
+}
