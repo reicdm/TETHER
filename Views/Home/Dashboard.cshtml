@@ -4,7 +4,7 @@
     Layout = "_Layout";
 
     var currentRole = ViewBag.Role as string;
-    bool isPM = (currentRole == "PM");
+    bool isPM = (currentRole == "Project Manager");
     int currentUserId = ViewBag.CurrentUserId ?? 0;
 
     var assignedTasks = Model.Where(t => t.Status != null && (t.Status.Name == "Pending" || t.Status.Name == "In Progress")).ToList();
