@@ -42,7 +42,8 @@
 
 .btn-primary,
 .btn-cancel,
-.btn-back{
+.btn-back {
+    text-decoration: none;
     display: inline-block;
     padding: .5rem 1.1rem;
     border-radius: 8px;

@@ -1,4 +1,16 @@
-﻿
+﻿.btn-dash {
+    background-color: var(--primary-red);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.btn-dash:hover {
+    background: var(--tint-red);
+    color: var(--primary-red);
+    border-color: var(--accent-red);
+}
+
 /* KANBAN BOARD: TASKS */
 .kanban-board {
     display: grid;
