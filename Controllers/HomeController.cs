@@ -27,31 +27,33 @@ namespace TETHER.Controllers
         [HttpGet]
         public IActionResult Login(string role)
         {
-            return View(new Auth
-            {
-                Role = role
-            });
+            ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
+
+            return View(new TeamMember{ Role = null });
         }
 
         [HttpPost]
-        public IActionResult Login(Auth login)
+        public IActionResult Login(TeamMember model)
         {
-            var authMember = _context.Auths
-                .FirstOrDefault(x => x.Email == login.Email);
 
-            if (authMember == null)
+            var member = _context.TeamMembers
+                .Include(t => t.Role)
+                .FirstOrDefault(x =>
+                    x.PersonalGmail == model.PersonalGmail);
+
+            if (member == null)
             {
                 ViewBag.Error = "Email not found.";
-                return View(login);
+                return View(model);
             }
 
-            if (authMember.Password != login.Password)
+            if (member.Password != model.Password)
             {
                 ViewBag.Error = "Incorrect password.";
-                return View(login);
+                return View(model);
             }
 
-            return RedirectToAction("Dashboard", new { role = authMember.Role });
+            return RedirectToAction("Dashboard", new { role = member.Role?.Name });
         }
 
         public IActionResult Dashboard(string role)

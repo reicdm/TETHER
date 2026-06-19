@@ -1,5 +1,4 @@
-﻿@model TETHER.Models.Entities.Auth
-@{
+﻿@{
     ViewData["Title"] = "Sign In";
     Layout = null;
 
@@ -38,8 +37,6 @@
                     <label class="auth-label">Password</label>
                     <input type="password" class="auth-form-control" placeholder="Enter your password" required />
                 </div>
-
-                <input asp-for="Role" type="hidden" value="@selectedRole" />
 
                 <button type="submit" class="btn text-uppercase py-3 w-100 btn-next text-white" style="background-color: var(--primary-red); border-color: transparent;">
                     Login

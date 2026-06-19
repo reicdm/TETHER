@@ -9,7 +9,6 @@ namespace TETHER.Data
         {
         }
 
-        public DbSet<Auth> Auths { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<TeamMemberRole> TeamMemberRoles { get; set; }
         public DbSet<TaskItem> TaskItems { get; set; }

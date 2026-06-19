@@ -14,6 +14,9 @@ namespace TETHER.Models.Entities
 
         public string PersonalGmail { get; set; } = string.Empty;
         public string SchoolGmail { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+
         public string GithubUsername { get; set; } = string.Empty;
         public string ProfileImageUrl { get; set; } = "/images/member-image/default.jpg";
 
