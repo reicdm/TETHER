@@ -6,7 +6,8 @@ namespace TETHER.Models
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string Priority { get; set; } = "High";      // High, Medium, Low
-        public string Status { get; set; } = "Assigned";    // Assigned, Progress, Approval, Done
+        public string Priority { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public string AssignedTo { get; set; } = string.Empty;
     }
 }

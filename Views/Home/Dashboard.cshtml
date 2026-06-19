@@ -5,11 +5,12 @@
 
     var currentRole = ViewBag.Role as string;
     bool isPM = (currentRole == "PM");
+    string currentUser = ViewBag.CurrentUser ?? "";
 
-    var assignedTasks = Model.Where(t => t.Status == "Assigned").ToList();
-    var pendingTasks = Model.Where(t => t.Status == "Pending").ToList();
-    var progressTasks = Model.Where(t => t.Status == "Progress").ToList();
-    var doneTasks = Model.Where(t => t.Status == "Done").ToList();
+    var assignedTasks = Model.Where(t => t.Status == "Assigned" || t.Status == "Pending" || t.Status == "Progress").ToList();
+    var pendingTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Pending").ToList();
+    var progressTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Progress").ToList();
+    var doneTasks = Model.Where(t => t.AssignedTo == currentUser && t.Status == "Done").ToList();
 }
 
 @section Styles {
@@ -38,7 +39,7 @@
         </div>
         @foreach (var task in assignedTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
@@ -53,7 +54,7 @@
         </div>
         @foreach (var task in pendingTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
@@ -68,7 +69,7 @@
         </div>
         @foreach (var task in progressTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
@@ -83,7 +84,7 @@
         </div>
         @foreach (var task in doneTasks)
         {
-            <div class="task-card" data-id="@task.Id">
+            <div class="task-card card-@task.Priority.ToLower()" data-id="@task.Id">
                 <div class="task-title">@task.Title</div>
                 <span class="badge-priority text-uppercase">@task.Priority</span>
             </div>
