@@ -37,6 +37,23 @@ namespace TETHER.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PriorityLevels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Low"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "High"
+                        });
                 });
 
             modelBuilder.Entity("TETHER.Models.Entities.Status", b =>
@@ -54,6 +71,23 @@ namespace TETHER.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "In Progress"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Completed"
+                        });
                 });
 
             modelBuilder.Entity("TETHER.Models.Entities.TaskItem", b =>
@@ -175,6 +209,59 @@ namespace TETHER.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("TeamMembers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Reina Chloe",
+                            GithubUsername = "reicdm",
+                            LastName = "Magpantay",
+                            MiddleName = "De Roja",
+                            PersonalGmail = "rcdrmagpantay@gmail.com",
+                            ProfileImageUrl = "/images/member-image/rei.jpg",
+                            RoleId = 1,
+                            SchoolGmail = "reinachloedmagpantay@iskolarngbayan.pup.edu.ph"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Johanna Angela",
+                            GithubUsername = "johannaestalilla1205",
+                            LastName = "Estalilla",
+                            MiddleName = "Quilatan",
+                            PersonalGmail = "pupbsitestalillajohanna@gmail.com",
+                            PmId = 1,
+                            ProfileImageUrl = "/images/member-image/hanna.jpg",
+                            RoleId = 2,
+                            SchoolGmail = "johannaangelapestalilla@iskolarngbayan.pup.edu.ph"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Sarah Mae",
+                            GithubUsername = "smhix",
+                            LastName = "Harina",
+                            MiddleName = "Dela Cruz",
+                            PersonalGmail = "sarahmaeharina@gmail.com",
+                            PmId = 1,
+                            ProfileImageUrl = "/images/member-image/sarah.jpg",
+                            RoleId = 3,
+                            SchoolGmail = "sarahmaedharina@iskolarngbayan.pup.edu.ph"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Josiah Zachary",
+                            GithubUsername = "znacku",
+                            LastName = "Sy",
+                            MiddleName = "Quinones",
+                            PersonalGmail = "bsitsyjosiah@gmail.com",
+                            PmId = 1,
+                            ProfileImageUrl = "/images/member-image/zach.jpg",
+                            RoleId = 3,
+                            SchoolGmail = "josiahzacharyqsy@iskolarngbayan.pup.edu.ph"
+                        });
                 });
 
             modelBuilder.Entity("TETHER.Models.Entities.TeamMemberRole", b =>
@@ -192,6 +279,23 @@ namespace TETHER.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TeamMemberRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Project Manager"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Backend Developer"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Frontend Developer"
+                        });
                 });
 
             modelBuilder.Entity("TETHER.Models.Entities.TaskItem", b =>

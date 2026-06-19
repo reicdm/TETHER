@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TETHER.Migrations
 {
     /// <inheritdoc />
@@ -143,6 +145,47 @@ namespace TETHER.Migrations
                         column: x => x.TeamMemberId,
                         principalTable: "TeamMembers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "PriorityLevels",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Low" },
+                    { 2, "Medium" },
+                    { 3, "High" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Pending" },
+                    { 2, "In Progress" },
+                    { 3, "Completed" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TeamMemberRoles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Project Manager" },
+                    { 2, "Backend Developer" },
+                    { 3, "Frontend Developer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TeamMembers",
+                columns: new[] { "Id", "FirstName", "GithubUsername", "LastName", "MiddleName", "PersonalGmail", "PmId", "ProfileImageUrl", "ProjectManagerId", "RoleId", "SchoolGmail" },
+                values: new object[,]
+                {
+                    { 1, "Reina Chloe", "reicdm", "Magpantay", "De Roja", "rcdrmagpantay@gmail.com", null, "/images/member-image/rei.jpg", null, 1, "reinachloedmagpantay@iskolarngbayan.pup.edu.ph" },
+                    { 2, "Johanna Angela", "johannaestalilla1205", "Estalilla", "Quilatan", "pupbsitestalillajohanna@gmail.com", 1, "/images/member-image/hanna.jpg", null, 2, "johannaangelapestalilla@iskolarngbayan.pup.edu.ph" },
+                    { 3, "Sarah Mae", "smhix", "Harina", "Dela Cruz", "sarahmaeharina@gmail.com", 1, "/images/member-image/sarah.jpg", null, 3, "sarahmaedharina@iskolarngbayan.pup.edu.ph" },
+                    { 4, "Josiah Zachary", "znacku", "Sy", "Quinones", "bsitsyjosiah@gmail.com", 1, "/images/member-image/zach.jpg", null, 3, "josiahzacharyqsy@iskolarngbayan.pup.edu.ph" }
                 });
 
             migrationBuilder.CreateIndex(
