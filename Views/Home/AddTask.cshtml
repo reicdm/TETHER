@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Create New Task";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/form.css" />
+}
+
+<div>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="card p-5 text-center shadow-lg form-container">
+
+            <h2 class="mb-5 text-uppercase form-title">Create New Task</h2>
+
+            <form asp-action="Dashboard" asp-controller="Home" method="get">
+
+                <!-- PRIORITY -->
+                <div class="task-input-group text-start">
+                    <label class="task-label">Priority</label>
+                    <label class="badge-priority text-uppercase">
+                        <input type="radio" name="SelectedPriority" value="High" class="d-none" />
+                        High
+                    </label>
+                    <label class="badge-priority text-uppercase">
+                        <input type="radio" name="SelectedPriority" value="Medium" class="d-none" />
+                        Medium
+                    </label>
+                    <label class="badge-priority text-uppercase">
+                        <input type="radio" name="SelectedPriority" value="Low" class="d-none" />
+                        Low
+                    </label>
+                </div>
+                
+                <!-- TASK NAME -->
+                <div class="task-input-group text-start">
+                    <label class="task-label">Task Name</label>
+                    <input type="text" class="task-form-control" placeholder="Add Title" required />
+                </div>
+
+                <!-- DEADLINE -->
+                <div class="task-input-group text-start">
+                    <label class="task-label">Deadline</label>
+                    <div class="d-flex align-items-center gap-2">
+                        <!-- START DATE -->
+                        <div class="task-input-group text-start flex-fill">
+                            <input type="date" class="task-form-control" required />
+                        </div>
+                        <!-- END DATE -->
+                        <span class="text-white">to</span>
+                        <div class="task-input-group text-start flex-fill">
+                            <input type="date" class="task-form-control" required />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEMBER/S ASSIGNED -->
+                <div class="task-input-group text-start">
+                    <label class="task-label">Assigned to</label>
+                    <div class="member-grid">
+                        <label class="badge-member">
+                            <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" />
+                            Johanna Angela P. Estalilla
+                        </label>
+                        <label class="badge-member">
+                            <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" />
+                            Sarah Mae D.C. Harina
+                        </label>
+                        <label class="badge-member">
+                            <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" />
+                            Reina Chloe D. Magpantay
+                        </label>
+                        <label class="badge-member">
+                            <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" />
+                            Josiah Zachary Q. Sy
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="task-input-group text-start">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-link-45deg link-icon"></i>
+                        <input type="text" class="task-form-control" placeholder="Add Link (optional)" />
+                    </div>
+                </div>
+
+                <div class="task-input-group text-start">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-list editor-icon"></i>
+                        <textarea class="task-form-control" placeholder="Add Description (optional)" rows="5"></textarea>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

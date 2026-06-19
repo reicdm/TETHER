@@ -51,5 +51,11 @@ namespace TETHER.Controllers
 
             return View(dummyTask);
         }
+
+        public IActionResult AddTask()
+        {
+            return View();
+        }
+
     }
 }
