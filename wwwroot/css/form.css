@@ -10,6 +10,10 @@
     border-radius: 16px;
 }
 
+.form-container.update {
+    padding: 4rem 3rem 3rem;
+}
+
 .form-title {
     color: var(--text-light);
     font-weight: 800;
@@ -33,6 +37,19 @@
 }
 
 /* BUTTONS */
+.btn-del {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    font-size: 24px;
+    color: var(--primary-red);
+    text-decoration: none;
+}
+
+.btn-del:hover{
+    color: var(--tint-red);
+}
+
 .btn-cont {
     display: flex;
     justify-content: center;
