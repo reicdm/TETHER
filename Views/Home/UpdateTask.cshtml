@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/css/form.css" />
 }
 <div style="display:flex; gap:.5rem;">
-    <button type="" class="btn-back">← Back</button>
+    <a class="btn-back" asp-action="Dashboard">← Back</a>
 </div>
 
 <div>
@@ -68,19 +68,19 @@
                     <div class="task-input-group text-start">
                         <label class="task-label">Assigned to</label>
                         <div class="member-grid">
-                            <label class="badge-member">
+                            <label class="badge-member mem-hanna">
                                 <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" />
                                 Johanna Angela P. Estalilla
                             </label>
-                            <label class="badge-member">
+                            <label class="badge-member mem-sara">
                                 <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" />
                                 Sarah Mae D.C. Harina
                             </label>
-                            <label class="badge-member">
+                            <label class="badge-member mem-rei">
                                 <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" />
                                 Reina Chloe D. Magpantay
                             </label>
-                            <label class="badge-member">
+                            <label class="badge-member mem-zach">
                                 <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" />
                                 Josiah Zachary Q. Sy
                             </label>
@@ -121,7 +121,7 @@
                             </label>
                             <label class="badge-status">
                                 <input type="radio" name="SelectedStatus" value="Completed" class="d-none"/>
-                                Complete
+                                Completed
                             </label>
                         </div>
                     </div>

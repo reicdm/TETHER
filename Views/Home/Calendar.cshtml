@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TETHER.Models.CalendarViewModel
+@{
     ViewData["Title"] = "Calendar";
     Layout = "_Layout";
 }
@@ -35,19 +36,40 @@
 
                 @for (int d = 1; d <= Model.DaysInMonth; d++)
                 {
-                    if (Model.Entries.TryGetValue(d, out var e))
-                    {
-                        <div class="cal-cell filled" style="background:@e.Color"
-                             title="@e.Date.ToString("MMM d"): @e.Highlight (@e.Stars)">
-                            <span class="cal-day">@d</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="cal-cell">
-                            <span class="cal-day">@d</span>
-                        </div>
-                    }
+                    <div class="cal-cell @(Model.Entries.ContainsKey(d) ? "filled" : "")">
+                        <span class="cal-day">@d</span>
+
+                        @if (Model.Entries.TryGetValue(d, out var entries))
+                        {
+                            <div class="cal-entries">
+                                @foreach (var e in entries)
+                                {
+                                    string priorityClass = e.Priority switch
+                                    {
+                                        "High" => "card-high",
+                                        "Medium" => "card-medium",
+                                        "Low" => "card-low",
+                                        _ => ""
+                                    };
+
+                                    string titleClass = e.Priority switch
+                                    {
+                                        "High" => "title-high",
+                                        "Medium" => "title-medium",
+                                        "Low" => "title-low",
+                                        _ => ""
+                                    };
+
+                                    <a class="cal-chip @priorityClass"
+                                       asp-action="UpdateTask"
+                                       asp-route-id="@e.Id"
+                                       title="@($"{e.Title} — {e.Priority} — {e.AssignedTo}")">
+                                        <span class="chip-label @titleClass">@e.Title</span>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
                 }
             </div>
         </div>
@@ -55,12 +77,36 @@
 
     <div class="todo-cont">
         <h2 class="todo-title">To-do List</h2>
-        <!-- to-do items go here -->
         <div class="todo-card">
-            <div class="task-card card-high">
-                <div class="task-title">Task Name</div>
-                <span class="badge-priority text-uppercase">"Task Name"</span>
-            </div>
+            @foreach (var dayEntries in Model.Entries.OrderBy(kv => kv.Key))
+            {
+                foreach (var e in dayEntries.Value)
+                {
+                    string priorityClass = e.Priority switch
+                    {
+                        "High" => "card-high",
+                        "Medium" => "card-medium",
+                        "Low" => "card-low",
+                        _ => ""
+                    };
+
+                    string dateClass = e.Priority switch
+                    {
+                        "High" => "date-high",
+                        "Medium" => "date-medium",
+                        "Low" => "date-low",
+                        _ => ""
+                    };
+
+                    <a class="task-card @priorityClass"
+                       asp-action="UpdateTask"
+                       asp-route-id="@e.Id">
+                        <span class="date-title @dateClass text-uppercase">@e.Date.ToString("MMM d")</span>
+                        <div class="task-title">@e.Title</div>
+                        <span class="badge-priority text-uppercase">@e.Priority</span>
+                    </a>
+                }
+            }
         </div>
     </div>
 </div>

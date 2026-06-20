@@ -42,7 +42,8 @@
 
 .btn-primary,
 .btn-cancel,
-.btn-back{
+.btn-back {
+    text-decoration: none;
     display: inline-block;
     padding: .5rem 1.1rem;
     border-radius: 8px;
@@ -158,6 +159,30 @@
 .badge-member {
     min-width: 220px;
     border-radius: 50px !important;
+}
+
+.badge-member.mem-hanna:has(input:checked) {
+    background: var(--tint-pink) !important;
+    color: var(--primary-pink) !important;
+    border-color: var(--accent-pink) !important;
+}
+
+.badge-member.mem-sara:has(input:checked) {
+    background: var(--tint-purple) !important;
+    color: var(--primary-purple) !important;
+    border-color: var(--accent-purple) !important;
+}
+
+.badge-member.mem-rei:has(input:checked) {
+    background: var(--tint-blue) !important;
+    color: var(--primary-blue) !important;
+    border-color: var(--accent-blue) !important;
+}
+
+.badge-member.mem-zach:has(input:checked) {
+    background: var(--tint-green) !important;
+    color: var(--primary-green) !important;
+    border-color: var(--accent-green) !important;
 }
 
 .badge-status {

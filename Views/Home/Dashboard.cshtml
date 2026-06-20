@@ -22,9 +22,9 @@
 
     @if (isPM)
     {
-        <button class="btn text-uppercase px-4 py-2 text-white" style="background-color: var(--primary-red); border-radius: 8px; font-size:0.85rem; font-weight: 700;">
+        <a class="btn btn-dash text-uppercase px-4 py-2 text-white" asp-action="AddTask">
             <i class="bi bi-plus-lg me-1"></i> New Task
-        </button>
+        </a>
     }
 </div>
 
@@ -39,10 +39,10 @@
         </div>
         @foreach (var task in assignedTasks)
         {
-            <div class="task-card" data-id="@task.Id">
-                <div class="task-title">@task.Name</div>
-                <span class="badge-priority text-uppercase">@(task.PriorityLevel?.Name ?? "N/A")</span>
-            </div>
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Title</div>
+                <span class="badge-priority text-uppercase">@task.Priority</span>
+            </a>
         }
     </div>
 
@@ -54,10 +54,10 @@
         </div>
         @foreach (var task in pendingTasks)
         {
-            <div class="task-card" data-id="@task.Id">
-                <div class="task-title">@task.Name</div>
-                <span class="badge-priority text-uppercase">@(task.PriorityLevel?.Name ?? "N/A")</span>
-            </div>
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Title</div>
+                <span class="badge-priority text-uppercase">@task.Priority</span>
+            </a>
         }
     </div>
 
@@ -69,10 +69,10 @@
         </div>
         @foreach (var task in progressTasks)
         {
-            <div class="task-card" data-id="@task.Id">
-                <div class="task-title">@task.Name</div>
-                <span class="badge-priority text-uppercase">@(task.PriorityLevel?.Name ?? "N/A")</span>
-            </div>
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Title</div>
+                <span class="badge-priority text-uppercase">@task.Priority</span>
+            </a>
         }
     </div>
 
@@ -84,10 +84,10 @@
         </div>
         @foreach (var task in doneTasks)
         {
-            <div class="task-card" data-id="@task.Id">
-                <div class="task-title">@task.Name</div>
-                <span class="badge-priority text-uppercase">@(task.PriorityLevel?.Name ?? "N/A")</span>
-            </div>
+            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="DoneTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Title</div>
+                <span class="badge-priority text-uppercase">@task.Priority</span>
+            </a>
         }
     </div>
 

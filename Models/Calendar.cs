@@ -11,6 +11,6 @@ namespace TETHER.Models
         public DateTime Next { get; set; }
         public int DaysInMonth { get; set; }
         public int FirstDayOfWeek { get; set; }
-        public Dictionary<int, CalendarEntry> Entries { get; set; } = new();
+        public Dictionary<int, List<CalendarEntry>> Entries { get; set; } = new();
     }
 }
