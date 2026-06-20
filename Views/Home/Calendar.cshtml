@@ -36,19 +36,40 @@
 
                 @for (int d = 1; d <= Model.DaysInMonth; d++)
                 {
-                    if (Model.Entries.TryGetValue(d, out CalendarEntry e)) // pinalitan ko muna
-                    {
-                        <div class="cal-cell filled" style="background:@e.Color"
-                             title="@e.Date.ToString("MMM d"): @e.Highlight (@e.Stars)">
-                            <span class="cal-day">@d</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="cal-cell">
-                            <span class="cal-day">@d</span>
-                        </div>
-                    }
+                    <div class="cal-cell @(Model.Entries.ContainsKey(d) ? "filled" : "")">
+                        <span class="cal-day">@d</span>
+
+                        @if (Model.Entries.TryGetValue(d, out var entries))
+                        {
+                            <div class="cal-entries">
+                                @foreach (var e in entries)
+                                {
+                                    string priorityClass = e.Priority switch
+                                    {
+                                        "High" => "card-high",
+                                        "Medium" => "card-medium",
+                                        "Low" => "card-low",
+                                        _ => ""
+                                    };
+
+                                    string titleClass = e.Priority switch
+                                    {
+                                        "High" => "title-high",
+                                        "Medium" => "title-medium",
+                                        "Low" => "title-low",
+                                        _ => ""
+                                    };
+
+                                    <a class="cal-chip @priorityClass"
+                                       asp-action="UpdateTask"
+                                       asp-route-id="@e.Id"
+                                       title="@($"{e.Title} — {e.Priority} — {e.AssignedTo}")">
+                                        <span class="chip-label @titleClass">@e.Title</span>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
                 }
             </div>
         </div>
