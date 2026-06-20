@@ -10,9 +10,7 @@
     border-radius: 16px;
 }
 
-.form-container.update {
-    padding: 4rem 3rem 3rem;
-}
+ 
 
 .form-title {
     color: var(--text-light);
