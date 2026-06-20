@@ -12,7 +12,7 @@ using TETHER.Data;
 namespace TETHER.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260620031238_Initial Migration")]
+    [Migration("20260620145734_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

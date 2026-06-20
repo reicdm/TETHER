@@ -16,6 +16,16 @@
 <div>
     <div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
         <div class="card p-5 text-center shadow-lg form-container">
+            @if (isPM)
+            {
+                <form asp-action="DeleteTask" asp-controller="Home" asp-route-id="@Model.Id" method="post"
+                      onsubmit="return confirm('Delete this task? This cannot be undone.');"
+                      style="display:inline;">
+                    <button type="submit" class="btn-del">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            }
             <h2 class="mb-5 text-uppercase form-title">Update Task</h2>
 
             @if (!ViewData.ModelState.IsValid)

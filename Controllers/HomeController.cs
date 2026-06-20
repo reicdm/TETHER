@@ -421,5 +421,31 @@ namespace TETHER.Controllers
             if (redirect != null) return redirect;
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteTask(int id)
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
+            var isPM = HttpContext.Session.GetString("Role") == "Project Manager";
+            if (!isPM)
+            {
+                return Forbid();
+            }
+
+            var task = _context.TaskItems
+                .Include(t => t.Assignments)
+                .FirstOrDefault(t => t.Id == id);
+
+            if (task == null) return NotFound();
+
+            _context.TaskItemAssignments.RemoveRange(task.Assignments);
+            _context.TaskItems.Remove(task);
+            _context.SaveChanges();
+
+            return RedirectToAction("Dashboard");
+        }
     }
 }
