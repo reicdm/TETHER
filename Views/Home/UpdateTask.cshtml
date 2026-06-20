@@ -1,11 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Create New Task";
+﻿@model TETHER.Models.ViewModels.TaskFormViewModel
+@{
+    ViewData["Title"] = "Update Task";
     Layout = "_Layout";
+    bool isPM = ViewBag.IsPM ?? false;
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/form.css" />
 }
+
 <div style="display:flex; gap:.5rem;">
     <a class="btn-back" asp-action="Dashboard">← Back</a>
 </div>
@@ -15,7 +18,30 @@
         <div class="card p-5 text-center shadow-lg form-container">
             <h2 class="mb-5 text-uppercase form-title">Update Task</h2>
 
-            <form asp-action="Dashboard" asp-controller="Home" method="get">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger alert-dismissible fade show text-start" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="UpdateTask" asp-controller="Home" method="post" novalidate>
+                <input type="hidden" asp-for="Id" />
+
+                @if (!isPM)
+                {
+                    <input type="hidden" name="Name" value="@Model.Name" />
+                    <input type="hidden" name="SelectedPriority" value="@Model.SelectedPriority" />
+                    <input type="hidden" name="StartDate" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+                    <input type="hidden" name="Deadline" value="@Model.Deadline?.ToString("yyyy-MM-dd")" />
+                    <input type="hidden" name="DocsLink" value="@Model.DocsLink" />
+                    <input type="hidden" name="Description" value="@Model.Description" />
+                    @foreach (var id in Model.SelectedMembers)
+                    {
+                        <input type="hidden" name="SelectedMembers" value="@id" />
+                    }
+                }
+
                 <!-- PRIORITY -->
                 <div class="divider-form">
                     <div class="task-input-group text-start">
@@ -23,43 +49,50 @@
                             <label class="task-label" style="white-space: nowrap;">Priority Level</label>
                             <div class="priority-grid">
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="High" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="High" class="d-none"
+                                           checked="@(Model.SelectedPriority == "High")"
+                                           disabled="@(!isPM)" />
                                     High
                                 </label>
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="Medium" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="Medium" class="d-none"
+                                           checked="@(Model.SelectedPriority == "Medium")"
+                                           disabled="@(!isPM)" />
                                     Medium
                                 </label>
                                 <label class="badge-priority text-uppercase">
-                                    <input type="radio" name="SelectedPriority" value="Low" class="d-none" />
+                                    <input type="radio" name="SelectedPriority" value="Low" class="d-none"
+                                           checked="@(Model.SelectedPriority == "Low")"
+                                           disabled="@(!isPM)" />
                                     Low
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <hr class="form-divider" />
 
                 <div class="divider-form">
                     <!-- TASK NAME -->
                     <div class="task-input-group text-start">
                         <label class="task-label">Task Name</label>
-                        <input type="text" class="task-form-control" placeholder="Add Title" required />
+                        <input asp-for="Name" type="text" class="task-form-control" placeholder="Add Title"
+                               readonly="@(!isPM)" />
                     </div>
 
                     <!-- DEADLINE -->
                     <div class="task-input-group text-start">
                         <label class="task-label">Deadline</label>
                         <div class="d-flex align-items-center gap-2">
-                            <!-- START DATE -->
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input asp-for="StartDate" type="date" class="task-form-control"
+                                       readonly="@(!isPM)" />
                             </div>
-                            <!-- END DATE -->
                             <span class="text-white">to</span>
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input asp-for="Deadline" type="date" class="task-form-control"
+                                       readonly="@(!isPM)" />
                             </div>
                         </div>
                     </div>
@@ -68,78 +101,80 @@
                     <div class="task-input-group text-start">
                         <label class="task-label">Assigned to</label>
                         <div class="member-grid">
-                            <label class="badge-member mem-hanna">
-                                <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" />
-                                Johanna Angela P. Estalilla
-                            </label>
-                            <label class="badge-member mem-sara">
-                                <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" />
-                                Sarah Mae D.C. Harina
-                            </label>
-                            <label class="badge-member mem-rei">
-                                <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" />
-                                Reina Chloe D. Magpantay
-                            </label>
-                            <label class="badge-member mem-zach">
-                                <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" />
-                                Josiah Zachary Q. Sy
-                            </label>
+                            @if (Model.AvailableMembers != null)
+                            {
+                                @foreach (var member in Model.AvailableMembers)
+                                {
+                                    <label class="badge-member @member.ColorClass">
+                                        <input type="checkbox" name="SelectedMembers" value="@member.Id" class="d-none"
+                                               checked="@(Model.SelectedMembers.Contains(member.Id))"
+                                               disabled="@(!isPM)" />
+                                        @member.FirstName @member.LastName
+                                    </label>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="divider-form">
                     <!-- LINK -->
                     <div class="divider-input">
                         <div class="d-flex align-items-center gap-2">
                             <i class="bi bi-link-45deg link-icon"></i>
-                            <input type="text" class="task-form-control" placeholder="Add Link (optional)" />
+                            <input asp-for="DocsLink" type="text" class="task-form-control" placeholder="Add Link (optional)"
+                                   readonly="@(!isPM)" />
                         </div>
                     </div>
 
                     <!-- DESCRIPTION -->
                     <div class="d-flex align-items-start gap-2">
                         <i class="bi bi-list editor-icon"></i>
-                        <textarea class="task-form-control" placeholder="Add Description (optional)" rows="5"></textarea>
+                        <textarea asp-for="Description" class="task-form-control" placeholder="Add Description (optional)" rows="5"
+                                  readonly="@(!isPM)"></textarea>
                     </div>
                 </div>
 
                 <hr class="form-divider" />
 
-                <!-- STATUS -->
+                <!-- STATUS — always enabled for everyone -->
                 <div class="divider-form">
                     <div class="task-input-group text-start">
                         <label class="task-label">Update Task Status</label>
                         <div class="status-grid">
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none"/>
+                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none"
+                                       checked="@(Model.SelectedStatus == "Pending")" />
                                 Pending
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none"/>
+                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none"
+                                       checked="@(Model.SelectedStatus == "In Progress")" />
                                 In Progress
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none"/>
+                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none"
+                                       checked="@(Model.SelectedStatus == "Completed")" />
                                 Completed
                             </label>
                         </div>
+                        @if (!isPM)
+                        {
+                            <small style="color:#999; font-size:.8rem; margin-top:.3rem; display:block;">
+                                Only status can be changed.
+                            </small>
+                        }
                     </div>
                 </div>
 
                 <hr class="form-divider" />
 
                 <div class="btn-cont">
-                    <button type="submit" class="btn-primary">
-                       Update
-                    </button>
-                    <button type="" class="btn-cancel">
-                        Cancel
-                    </button>
+                    <button type="submit" class="btn-primary">Update</button>
+                    <a asp-action="Dashboard" class="btn-cancel">Cancel</a>
                 </div>
             </form>
 
         </div>
     </div>
-
 </div>

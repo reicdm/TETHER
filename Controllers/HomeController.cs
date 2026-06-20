@@ -18,7 +18,6 @@ namespace TETHER.Controllers
             _context = context;
         }
 
-        // Returns the redirect if not logged in, otherwise null
         private IActionResult RequireLogin()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -42,18 +41,15 @@ namespace TETHER.Controllers
         public IActionResult Login(string role)
         {
             ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
-
             return View(new TeamMember { Role = null });
         }
 
         [HttpPost]
         public IActionResult Login(TeamMember model)
         {
-
             var member = _context.TeamMembers
                 .Include(t => t.Role)
-                .FirstOrDefault(x =>
-                    x.PersonalGmail == model.PersonalGmail);
+                .FirstOrDefault(x => x.PersonalGmail == model.PersonalGmail);
 
             if (member == null)
             {
@@ -67,7 +63,7 @@ namespace TETHER.Controllers
                 return View(model);
             }
 
-            HttpContext.Session.SetString("Role", member.Role?.Name ?? "Member");
+            HttpContext.Session.SetString("Role", member.Role?.Name ?? string.Empty);
             HttpContext.Session.SetInt32("UserId", member.Id);
 
             return RedirectToAction("Dashboard");
@@ -122,7 +118,6 @@ namespace TETHER.Controllers
                 if (!model.Entries.ContainsKey(day))
                     model.Entries[day] = new List<CalendarEntry>();
 
-
                 model.Entries[day].Add(new CalendarEntry
                 {
                     Id = nextId++,
@@ -146,7 +141,6 @@ namespace TETHER.Controllers
             AddEntry(17, "IAS1: Activity # 3_Final Term", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
             AddEntry(20, "CP1: Revision Presentation", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
             AddEntry(22, "CW: Final Exam", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
-
 
             return View(model);
         }
@@ -259,11 +253,110 @@ namespace TETHER.Controllers
             return RedirectToAction("Dashboard");
         }
 
-        public IActionResult UpdateTask()
+        [HttpGet]
+        public IActionResult UpdateTask(int id)
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var task = _context.TaskItems
+                .Include(t => t.Assignments)
+                .Include(t => t.PriorityLevel)
+                .Include(t => t.Status)
+                .FirstOrDefault(t => t.Id == id);
+
+            if (task == null) return NotFound();
+
+            ViewBag.IsPM = HttpContext.Session.GetString("Role") == "Project Manager";
+
+            var model = new TaskFormViewModel
+            {
+                Id = task.Id,
+                Name = task.Name,
+                SelectedPriority = task.PriorityLevel?.Name ?? string.Empty,
+                StartDate = task.StartDate,
+                Deadline = task.Deadline,
+                DocsLink = task.DocsLink,
+                Description = task.Description,
+                SelectedStatus = task.Status?.Name ?? "Pending",
+                SelectedMembers = task.Assignments.Select(a => a.AssignedTo).ToList(),
+                AvailableMembers = _context.TeamMembers.ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateTask(TaskFormViewModel model)
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
+            var isPM = HttpContext.Session.GetString("Role") == "Project Manager";
+
+            if (!ModelState.IsValid)
+            {
+                model.AvailableMembers = _context.TeamMembers.ToList();
+                ViewBag.IsPM = isPM;
+                return View(model);
+            }
+
+            var task = _context.TaskItems
+                .Include(t => t.Assignments)
+                .FirstOrDefault(t => t.Id == model.Id);
+
+            if (task == null) return NotFound();
+
+            var status = _context.Statuses
+                .FirstOrDefault(s => s.Name == model.SelectedStatus);
+
+            if (status == null)
+            {
+                ModelState.AddModelError("", "Invalid status selected.");
+                model.AvailableMembers = _context.TeamMembers.ToList();
+                ViewBag.IsPM = isPM;
+                return View(model);
+            }
+
+            // Everyone can update status
+            task.StatusId = status.Id;
+
+            // Only PM can update everything else
+            if (isPM)
+            {
+                var priorityLevel = _context.PriorityLevels
+                    .FirstOrDefault(p => p.Name == model.SelectedPriority);
+
+                if (priorityLevel == null)
+                {
+                    ModelState.AddModelError("", "Invalid priority selected.");
+                    model.AvailableMembers = _context.TeamMembers.ToList();
+                    ViewBag.IsPM = isPM;
+                    return View(model);
+                }
+
+                task.Name = model.Name;
+                task.PriorityLevelId = priorityLevel.Id;
+                task.StartDate = model.StartDate;
+                task.Deadline = model.Deadline;
+                task.DocsLink = model.DocsLink ?? string.Empty;
+                task.Description = model.Description ?? string.Empty;
+
+                task.Assignments.Clear();
+                foreach (var memberId in model.SelectedMembers)
+                {
+                    task.Assignments.Add(new TaskItemAssignment
+                    {
+                        AssignedTo = memberId,
+                        AssignedAt = DateTime.Now
+                    });
+                }
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Dashboard");
         }
 
         public IActionResult DoneTask()

@@ -5,6 +5,7 @@ namespace TETHER.Models.ViewModels
 {
     public class TaskFormViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Task name is required.")]
         public string Name { get; set; } = string.Empty;
 
