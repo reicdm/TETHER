@@ -24,19 +24,19 @@
             <ul class="nav-menu">
                 <li>
                     <a asp-action="Dashboard" asp-controller="Home" asp-route-role="@Context.Request.Query["role"]"
-                        class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")">
+                       class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")">
                         <i class="bi bi-grid-1x2-fill"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a asp-action="Calendar" asp-controller="Home"
-                        class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Calendar" ? "active" : "")">
+                       class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Calendar" ? "active" : "")">
                         <i class="bi bi-calendar3"></i> Calendar
                     </a>
                 </li>
                 <li>
-                    <a asp-action="Team" asp-controller="Home" 
-                        class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Team" ? "active" : "")">
+                    <a asp-action="Team" asp-controller="Home"
+                       class="nav-item-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Team" ? "active" : "")">
                         <i class="bi bi-people"></i> My Team
                     </a>
                 </li>
@@ -53,12 +53,14 @@
 
                 <input type="text" class="form-control search-bar" placeholder="Search" />
 
-                <div class="d-flex align-items-center gap-2" style="width: 120px; justify-content: flex-end;">
+                <a asp-action="Profile" asp-controller="Home"
+                   class="d-flex align-items-center gap-2 text-decoration-none"
+                   style="width: 120px; justify-content: flex-end;">
                     <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                         <i class="bi bi-person-fill text-dark"></i>
                     </div>
                     <span class="text-white" style="font-size: 0.9rem; font-weight: 500;">Profile</span>
-                </div>
+                </a>
             </header>
 
             <div class="content-body">

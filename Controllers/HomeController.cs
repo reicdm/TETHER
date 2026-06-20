@@ -159,32 +159,88 @@ namespace TETHER.Controllers
             return View(Team);
         }
 
+        public IActionResult Profile()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var member = _context.TeamMembers.FirstOrDefault(m => m.Id == userId);
+
+            if (member == null) return RedirectToAction("Login");
+
+            var lastName = member.LastName?.Trim();
+
+            if (string.Equals(lastName, "Estalilla", StringComparison.OrdinalIgnoreCase))
+                return RedirectToAction("Profile_Hanna");
+            if (string.Equals(lastName, "Harina", StringComparison.OrdinalIgnoreCase))
+                return RedirectToAction("Profile_Sarah");
+            if (string.Equals(lastName, "Magpantay", StringComparison.OrdinalIgnoreCase))
+                return RedirectToAction("Profile_Rei");
+            if (string.Equals(lastName, "Sy", StringComparison.OrdinalIgnoreCase))
+                return RedirectToAction("Profile_Zach");
+
+            return RedirectToAction("Dashboard");
+        }
+
         public IActionResult Profile_Hanna()
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var member = _context.TeamMembers
+                .Include(t => t.Role)
+                .FirstOrDefault(m => m.LastName != null
+                    && m.LastName.Trim().ToLower() == "estalilla");
+
+            if (member == null) return NotFound();
+
+            return View(member);
         }
 
         public IActionResult Profile_Rei()
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var member = _context.TeamMembers
+                .Include(t => t.Role)
+                .FirstOrDefault(m => m.LastName != null
+                    && m.LastName.Trim().ToLower() == "magpantay");
+
+            if (member == null) return NotFound();
+
+            return View(member);
         }
 
         public IActionResult Profile_Sarah()
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var member = _context.TeamMembers
+                .Include(t => t.Role)
+                .FirstOrDefault(m => m.LastName != null
+                    && m.LastName.Trim().ToLower() == "harina");
+
+            if (member == null) return NotFound();
+
+            return View(member);
         }
 
         public IActionResult Profile_Zach()
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var member = _context.TeamMembers
+                .Include(t => t.Role)
+                .FirstOrDefault(m => m.LastName != null
+                    && m.LastName.Trim().ToLower() == "sy");
+
+            if (member == null) return NotFound();
+
+            return View(member);
         }
 
         [HttpGet]
