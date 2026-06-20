@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Drawing;
@@ -109,38 +109,40 @@ namespace TETHER.Controllers
                 Entries = new Dictionary<int, List<CalendarEntry>>()
             };
 
-            int nextId = 1;
+            var tasks = _context.TaskItems
+                .Include(t => t.PriorityLevel)
+                .Include(t => t.Status)
+                .Include(t => t.Assignments)
+                    .ThenInclude(a => a.TeamMember)
+                .Where(t => t.Deadline.HasValue
+                    && t.Deadline.Value.Year == y
+                    && t.Deadline.Value.Month == m)
+                .ToList();
 
-            void AddEntry(int day, string title, string priority, string status, string assignedTo)
+            foreach (var task in tasks)
             {
-                if (day < 1 || day > model.DaysInMonth) return;
+                int day = task.Deadline!.Value.Day;
 
                 if (!model.Entries.ContainsKey(day))
                     model.Entries[day] = new List<CalendarEntry>();
 
+                var assignedNames = task.Assignments
+                    .Select(a => a.TeamMember != null
+                        ? $"{a.TeamMember.FirstName} {a.TeamMember.LastName}"
+                        : "")
+                    .Where(n => !string.IsNullOrEmpty(n))
+                    .ToList();
+
                 model.Entries[day].Add(new CalendarEntry
                 {
-                    Id = nextId++,
-                    Date = new DateTime(y, m, day),
-                    Title = title,
-                    Priority = priority,
-                    Status = status,
-                    AssignedTo = assignedTo
+                    Id = task.Id,
+                    Date = task.Deadline!.Value,
+                    Title = task.Name,
+                    Priority = task.PriorityLevel?.Name ?? "Low",
+                    Status = task.Status?.Name ?? "Pending",
+                    AssignedTo = string.Join(", ", assignedNames)
                 });
             }
-
-            AddEntry(1, "IAS1: Activity # 2_Final Term", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
-            AddEntry(5, "CP1: Proposal Defense", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
-            AddEntry(9, "DM: Pass Previous Activies", "Medium", "Progress", "SARAH MAE D.C. HARINA");
-            AddEntry(11, "IAS1: Role Play", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
-            AddEntry(13, "DM: Activity #1", "Medium", "Pending", "SARAH MAE D.C. HARINA");
-            AddEntry(14, "CW: Module 5 Quiz", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
-            AddEntry(14, "CW: Online Discussion Board 5", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
-            AddEntry(16, "ADET: Activity 6 - Project Documentation", "High", "Progress", "REINA CHLOE D. MAGPANTAY");
-            AddEntry(16, "ADET: Final Project", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
-            AddEntry(17, "IAS1: Activity # 3_Final Term", "Medium", "Pending", "JOSIAH ZACHARY Q. SY");
-            AddEntry(20, "CP1: Revision Presentation", "High", "Pending", "REINA CHLOE D. MAGPANTAY");
-            AddEntry(22, "CW: Final Exam", "Low", "Pending", "JOHANNA ANGELA P. ESTALILLA");
 
             return View(model);
         }
@@ -319,10 +321,8 @@ namespace TETHER.Controllers
                 return View(model);
             }
 
-            // Everyone can update status
             task.StatusId = status.Id;
 
-            // Only PM can update everything else
             if (isPM)
             {
                 var priorityLevel = _context.PriorityLevels
