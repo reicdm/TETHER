@@ -35,7 +35,7 @@
 
                 @for (int d = 1; d <= Model.DaysInMonth; d++)
                 {
-                    if (Model.Entries.TryGetValue(d, out var e))
+                    if (Model.Entries.TryGetValue(d, out CalendarEntry e)) // pinalitan ko muna
                     {
                         <div class="cal-cell filled" style="background:@e.Color"
                              title="@e.Date.ToString("MMM d"): @e.Highlight (@e.Stars)">
