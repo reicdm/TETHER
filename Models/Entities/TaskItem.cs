@@ -11,6 +11,7 @@ namespace TETHER.Models.Entities
         public int PriorityLevelId { get; set; } 
         public PriorityLevel? PriorityLevel { get; set; }
 
+        public DateTime? StartDate { get; set; }
         public DateTime? Deadline { get; set; }
         public string DocsLink { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

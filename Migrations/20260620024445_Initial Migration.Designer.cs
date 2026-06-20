@@ -12,7 +12,7 @@ using TETHER.Data;
 namespace TETHER.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260619181241_Initial Migration")]
+    [Migration("20260620024445_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -124,6 +124,9 @@ namespace TETHER.Migrations
 
                     b.Property<int?>("ProjectManagerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");

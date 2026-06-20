@@ -122,6 +122,9 @@ namespace TETHER.Migrations
                     b.Property<int?>("ProjectManagerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
