@@ -39,9 +39,9 @@
         </div>
         @foreach (var task in assignedTasks)
         {
-            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
-                <div class="task-title">@task.Title</div>
-                <span class="badge-priority text-uppercase">@task.Priority</span>
+            <a class="task-card card-@(task.PriorityLevel?.Name?.ToLower() ?? "low")" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Name</div>
+                <span class="badge-priority text-uppercase">@task.PriorityLevel?.Name</span>
             </a>
         }
     </div>
@@ -54,9 +54,9 @@
         </div>
         @foreach (var task in pendingTasks)
         {
-            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
-                <div class="task-title">@task.Title</div>
-                <span class="badge-priority text-uppercase">@task.Priority</span>
+            <a class="task-card card-@(task.PriorityLevel?.Name?.ToLower() ?? "low")" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Name</div>
+                <span class="badge-priority text-uppercase">@task.PriorityLevel?.Name</span>
             </a>
         }
     </div>
@@ -69,9 +69,9 @@
         </div>
         @foreach (var task in progressTasks)
         {
-            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
-                <div class="task-title">@task.Title</div>
-                <span class="badge-priority text-uppercase">@task.Priority</span>
+            <a class="task-card card-@(task.PriorityLevel?.Name?.ToLower() ?? "low")" data-id="@task.Id" asp-action="UpdateTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Name</div>
+                <span class="badge-priority text-uppercase">@task.PriorityLevel?.Name</span>
             </a>
         }
     </div>
@@ -84,9 +84,9 @@
         </div>
         @foreach (var task in doneTasks)
         {
-            <a class="task-card card-@task.Priority.ToLower()" data-id="@task.Id" asp-action="DoneTask" asp-route-id="@task.Id">
-                <div class="task-title">@task.Title</div>
-                <span class="badge-priority text-uppercase">@task.Priority</span>
+            <a class="task-card card-@(task.PriorityLevel?.Name?.ToLower() ?? "low")" data-id="@task.Id" asp-action="DoneTask" asp-route-id="@task.Id">
+                <div class="task-title">@task.Name</div>
+                <span class="badge-priority text-uppercase">@task.PriorityLevel?.Name</span>
             </a>
         }
     </div>

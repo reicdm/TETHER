@@ -17,6 +17,17 @@ namespace TETHER.Controllers
             _context = context;
         }
 
+        // Returns the redirect if not logged in, otherwise null
+        private IActionResult RequireLogin()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return null;
+        }
+
         public IActionResult Index() { return View(); }
         public IActionResult Privacy() { return View(); }
 
@@ -31,7 +42,7 @@ namespace TETHER.Controllers
         {
             ViewBag.Role = string.IsNullOrEmpty(role) ? "Member" : role;
 
-            return View(new TeamMember{ Role = null });
+            return View(new TeamMember { Role = null });
         }
 
         [HttpPost]
@@ -55,7 +66,7 @@ namespace TETHER.Controllers
                 return View(model);
             }
 
-            HttpContext.Session.SetString("Role", member.Role?.Name);
+            HttpContext.Session.SetString("Role", member.Role?.Name ?? "Member");
             HttpContext.Session.SetInt32("UserId", member.Id);
 
             return RedirectToAction("Dashboard");
@@ -63,6 +74,9 @@ namespace TETHER.Controllers
 
         public IActionResult Dashboard()
         {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
             var role = HttpContext.Session.GetString("Role");
             var userId = HttpContext.Session.GetInt32("UserId");
 
@@ -78,8 +92,12 @@ namespace TETHER.Controllers
 
             return View(Tasks);
         }
-        public IActionResult Calendar(int? year, int? month) 
+
+        public IActionResult Calendar(int? year, int? month)
         {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
             int y = year ?? DateTime.Today.Year;
             int m = month ?? DateTime.Today.Month;
 
@@ -131,22 +149,66 @@ namespace TETHER.Controllers
 
             return View(model);
         }
+
         public IActionResult Team()
         {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
             var Team = _context.TeamMembers
                 .Include(t => t.Role)
-                .ToList(); 
+                .ToList();
 
             return View(Team);
         }
-        public IActionResult Profile_Hanna() { return View(); }
-        public IActionResult Profile_Rei() { return View(); }
-        public IActionResult Profile_Sarah() { return View(); }
-        public IActionResult Profile_Zach() { return View(); }
 
-        public IActionResult AddTask() { return View(); }
+        public IActionResult Profile_Hanna()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
 
-        public IActionResult UpdateTask() { return View(); }
-        public IActionResult DoneTask() { return View(); }
+        public IActionResult Profile_Rei()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
+
+        public IActionResult Profile_Sarah()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
+
+        public IActionResult Profile_Zach()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
+
+        public IActionResult AddTask()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
+
+        public IActionResult UpdateTask()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
+
+        public IActionResult DoneTask()
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+            return View();
+        }
     }
 }
