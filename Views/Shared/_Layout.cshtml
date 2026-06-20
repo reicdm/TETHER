@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string GetProfileAction(string? currentUser) => currentUser switch
+    {
+        "REINA CHLOE D. MAGPANTAY" => "Profile_Rei",
+        "JOHANNA ANGELA P. ESTALILLA" => "Profile_Hanna",
+        "SARAH MAE D.C. HARINA" => "Profile_Sarah",
+        "JOSIAH ZACHARY Q. SY" => "Profile_Zach",
+        _ => "Profile_Rei"
+    };
+
+    string profileAction = GetProfileAction(ViewBag.CurrentUser as string);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -53,12 +66,13 @@
 
                 <input type="text" class="form-control search-bar" placeholder="Search" />
 
-                <div class="d-flex align-items-center gap-2" style="width: 120px; justify-content: flex-end;">
+                <a class="d-flex align-items-center gap-2" style="width: 120px; justify-content: flex-end; text-decoration: none;"
+                   asp-controller="Home" asp-action="@profileAction">
                     <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
                         <i class="bi bi-person-fill text-dark"></i>
                     </div>
                     <span class="text-white" style="font-size: 0.9rem; font-weight: 500;">Profile</span>
-                </div>
+                </a>
             </header>
 
             <div class="content-body">
