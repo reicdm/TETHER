@@ -52,6 +52,7 @@ namespace TETHER.Data
                     GithubUsername = "reicdm",
                     Password = "pm012345",
                     ProfileImageUrl = "/images/member-image/rei.jpg",
+                    ColorClass = "mem-rei",
                     PmId = null 
                 },
                 new TeamMember
@@ -65,6 +66,7 @@ namespace TETHER.Data
                     SchoolGmail = "johannaangelapestalilla@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "johannaestalilla1205",
                     Password = "member01",
+                    ColorClass = "mem-hanna",
                     ProfileImageUrl = "/images/member-image/hanna.jpg",
                     PmId = 1
                 },
@@ -79,6 +81,7 @@ namespace TETHER.Data
                     SchoolGmail = "sarahmaedharina@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "smhix",
                     Password = "member02",
+                    ColorClass = "mem-sara",
                     ProfileImageUrl = "/images/member-image/sarah.jpg",
                     PmId = 1 
                 },
@@ -93,6 +96,7 @@ namespace TETHER.Data
                     SchoolGmail = "josiahzacharyqsy@iskolarngbayan.pup.edu.ph",
                     GithubUsername = "znacku",
                     Password = "member03",
+                    ColorClass = "mem-zach",
                     ProfileImageUrl = "/images/member-image/zach.jpg",
                     PmId = 1 
                 }

@@ -6,6 +6,7 @@ using System.Globalization;
 using TETHER.Models;
 using TETHER.Models.Entities;
 using TETHER.Data;
+using TETHER.Models.ViewModels;
 
 namespace TETHER.Controllers
 {
@@ -190,11 +191,72 @@ namespace TETHER.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AddTask()
         {
             var redirect = RequireLogin();
             if (redirect != null) return redirect;
-            return View();
+
+            var model = new TaskFormViewModel
+            {
+                AvailableMembers = _context.TeamMembers.ToList()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddTask(TaskFormViewModel model)
+        {
+            var redirect = RequireLogin();
+            if (redirect != null) return redirect;
+
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (!ModelState.IsValid)
+            {
+                model.AvailableMembers = _context.TeamMembers.ToList();
+                return View(model);
+            }
+
+            var priorityLevel = _context.PriorityLevels
+                .FirstOrDefault(p => p.Name == model.SelectedPriority);
+
+            var status = _context.Statuses
+                .FirstOrDefault(s => s.Name == model.SelectedStatus);
+
+            if (priorityLevel == null || status == null)
+            {
+                ModelState.AddModelError("", "Invalid priority or status selected.");
+                model.AvailableMembers = _context.TeamMembers.ToList();
+                return View(model);
+            }
+
+            var task = new TaskItem
+            {
+                Name = model.Name,
+                PriorityLevelId = priorityLevel.Id,
+                StartDate = model.StartDate,
+                Deadline = model.Deadline,
+                DocsLink = model.DocsLink ?? string.Empty,
+                Description = model.Description ?? string.Empty,
+                StatusId = status.Id,
+                PmId = userId!.Value
+            };
+
+            foreach (var memberId in model.SelectedMembers)
+            {
+                task.Assignments.Add(new TaskItemAssignment
+                {
+                    AssignedTo = memberId,
+                    AssignedAt = DateTime.Now
+                });
+            }
+
+            _context.TaskItems.Add(task);
+            _context.SaveChanges();
+
+            return RedirectToAction("Dashboard");
         }
 
         public IActionResult UpdateTask()

@@ -168,6 +168,10 @@ namespace TETHER.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ColorClass")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -221,6 +225,7 @@ namespace TETHER.Migrations
                         new
                         {
                             Id = 1,
+                            ColorClass = "mem-rei",
                             FirstName = "Reina Chloe",
                             GithubUsername = "reicdm",
                             LastName = "Magpantay",
@@ -234,6 +239,7 @@ namespace TETHER.Migrations
                         new
                         {
                             Id = 2,
+                            ColorClass = "mem-hanna",
                             FirstName = "Johanna Angela",
                             GithubUsername = "johannaestalilla1205",
                             LastName = "Estalilla",
@@ -248,6 +254,7 @@ namespace TETHER.Migrations
                         new
                         {
                             Id = 3,
+                            ColorClass = "mem-sara",
                             FirstName = "Sarah Mae",
                             GithubUsername = "smhix",
                             LastName = "Harina",
@@ -262,6 +269,7 @@ namespace TETHER.Migrations
                         new
                         {
                             Id = 4,
+                            ColorClass = "mem-zach",
                             FirstName = "Josiah Zachary",
                             GithubUsername = "znacku",
                             LastName = "Sy",

@@ -19,6 +19,7 @@ namespace TETHER.Models.Entities
 
         public string GithubUsername { get; set; } = string.Empty;
         public string ProfileImageUrl { get; set; } = "/images/member-image/default.jpg";
+        public string ColorClass { get; set; } = "mem-default";
 
         public int? PmId { get; set; }
         public TeamMember? ProjectManager { get; set; }

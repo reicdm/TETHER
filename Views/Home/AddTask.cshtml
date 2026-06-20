@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TETHER.Models.ViewModels.TaskFormViewModel
+@{
     ViewData["Title"] = "Create New Task";
     Layout = "_Layout";
 }
@@ -6,6 +7,7 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/form.css" />
 }
+
 <div style="display:flex; gap:.5rem;">
     <a class="btn-back" asp-action="Dashboard">← Back</a>
 </div>
@@ -15,7 +17,14 @@
         <div class="card p-5 text-center shadow-lg form-container">
             <h2 class="mb-5 text-uppercase form-title">Create New Task</h2>
 
-            <form asp-action="Dashboard" asp-controller="Home" method="get">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger alert-dismissible fade show text-start" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="AddTask" asp-controller="Home" method="post" novalidate>
                 <!-- PRIORITY -->
                 <div class="divider-form">
                     <div class="task-input-group text-start">
@@ -38,28 +47,26 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr class="form-divider" />
 
                 <div class="divider-form">
                     <!-- TASK NAME -->
                     <div class="task-input-group text-start">
                         <label class="task-label">Task Name</label>
-                        <input type="text" class="task-form-control" placeholder="Add Title" required />
+                        <input asp-for="Name" type="text" class="task-form-control" placeholder="Add Title" />
                     </div>
 
                     <!-- DEADLINE -->
                     <div class="task-input-group text-start">
                         <label class="task-label">Deadline</label>
                         <div class="d-flex align-items-center gap-2">
-                            <!-- START DATE -->
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input asp-for="StartDate" type="date" class="task-form-control" />
                             </div>
-                            <!-- END DATE -->
                             <span class="text-white">to</span>
                             <div class="task-input-group text-start flex-fill">
-                                <input type="date" class="task-form-control" required />
+                                <input asp-for="Deadline" type="date" class="task-form-control" />
                             </div>
                         </div>
                     </div>
@@ -68,39 +75,33 @@
                     <div class="task-input-group text-start">
                         <label class="task-label">Assigned to</label>
                         <div class="member-grid">
-                            <label class="badge-member mem-hanna">
-                                <input type="checkbox" name="SelectedMembers" value="Johanna Angela P. Estalilla" class="d-none" />
-                                Johanna Angela P. Estalilla
-                            </label>
-                            <label class="badge-member mem-sara">
-                                <input type="checkbox" name="SelectedMembers" value="Sarah Mae D.C. Harina" class="d-none" />
-                                Sarah Mae D.C. Harina
-                            </label>
-                            <label class="badge-member mem-rei">
-                                <input type="checkbox" name="SelectedMembers" value="Reina Chloe D. Magpantay" class="d-none" />
-                                Reina Chloe D. Magpantay
-                            </label>
-                            <label class="badge-member mem-zach">
-                                <input type="checkbox" name="SelectedMembers" value="Josiah Zachary Q. Sy" class="d-none" />
-                                Josiah Zachary Q. Sy
-                            </label>
+                            @if (Model.AvailableMembers != null)
+                            {
+                                @foreach (var member in Model.AvailableMembers)
+                                {
+                                    <label class="badge-member @member.ColorClass">
+                                        <input type="checkbox" name="SelectedMembers" value="@member.Id" class="d-none" />
+                                        @member.FirstName @member.LastName
+                                    </label>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="divider-form">
                     <!-- LINK -->
                     <div class="divider-input">
                         <div class="d-flex align-items-center gap-2">
                             <i class="bi bi-link-45deg link-icon"></i>
-                            <input type="text" class="task-form-control" placeholder="Add Link (optional)" />
+                            <input asp-for="DocsLink" type="text" class="task-form-control" placeholder="Add Link (optional)" />
                         </div>
                     </div>
 
                     <!-- DESCRIPTION -->
                     <div class="d-flex align-items-start gap-2">
                         <i class="bi bi-list editor-icon"></i>
-                        <textarea class="task-form-control" placeholder="Add Description (optional)" rows="5"></textarea>
+                        <textarea asp-for="Description" class="task-form-control" placeholder="Add Description (optional)" rows="5"></textarea>
                     </div>
                 </div>
 
@@ -112,19 +113,19 @@
                         <label class="task-label">Update Task Status</label>
                         <div class="status-grid">
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none" checked/>
+                                <input type="radio" name="SelectedStatus" value="Pending" class="d-none" checked />
                                 Pending
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none" disabled/>
+                                <input type="radio" name="SelectedStatus" value="In Progress" class="d-none" disabled />
                                 In Progress
                             </label>
                             <label class="badge-status">
-                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none" disabled/>
+                                <input type="radio" name="SelectedStatus" value="Completed" class="d-none" disabled />
                                 Completed
                             </label>
                         </div>
-                        <small id="ratingHint" style="color:#999; font-size:.8rem; margin-top:.3rem; display:block;">
+                        <small style="color:#999; font-size:.8rem; margin-top:.3rem; display:block;">
                             Only available when updating the task.
                         </small>
                     </div>
@@ -133,16 +134,11 @@
                 <hr class="form-divider" />
 
                 <div class="btn-cont">
-                    <button type="submit" class="btn-primary">
-                        Confirm
-                    </button>
-                    <button type="" class="btn-cancel">
-                        Cancel
-                    </button>
+                    <button type="submit" class="btn-primary">Confirm</button>
+                    <a asp-action="Dashboard" class="btn-cancel">Cancel</a>
                 </div>
             </form>
 
         </div>
     </div>
-
 </div>
